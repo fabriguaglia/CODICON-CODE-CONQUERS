@@ -4,7 +4,7 @@ npm install
 correr aplicacion
 npm run dev
 
-#Backend
+# Backend
 debemos instalar las dependencia y solicitar las variables de entorno 
 npm install
 luego correr la aplicacion
