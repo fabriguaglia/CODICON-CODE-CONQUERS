@@ -27,12 +27,9 @@ const ExperienceList = ({ items, backgroundColor }) => {
 			</div>
 			<div className="mt-8 flex flex-col items-center">
 				<button className="bg-secondary-color text-xl font-medium text-white py-2 px-16 rounded-full hover:bg-opacity-80 transition duration-300 uppercase">
-					Ver más comunidades...
+					Leer mas experiencias
 				</button>
-				<h2 className="text-lg mb-4">
-					¿No encuentras tu comunidad?{" "}
-					<a className="color-primary">Crea una nueva.</a>
-				</h2>
+				
 			</div>
 		</div>
 	);
