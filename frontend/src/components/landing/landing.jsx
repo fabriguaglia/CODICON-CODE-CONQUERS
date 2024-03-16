@@ -14,13 +14,13 @@ const Landing = () => {
 			<div className="relative z-10 flex items-center justify-around h-full">
 				{/* Columna izquierda */}
 				<div className="flex flex-col items-center justify-center text-gray px-8">
-					<h1 className="text-4xl font-bold mb-4">Título de tu Landing</h1>
-					<p className="text-lg mb-6">Subtítulo de tu Landing</p>
-					<button className="bg-primary-color text-white py-2 px-20 rounded-full mb-4 hover:bg-opacity-80 transition duration-300">
-						¡Acción!
+					<h1 className="text-6xl mb-4">Transmivencia</h1>
+					<p className="text-xl mb-6">Transmite tu experiencia</p>
+					<button className="text-2xl bg-primary-color text-white py-6 px-20 rounded-full mb-4 hover:bg-opacity-80 transition duration-300">
+						Crea tu comunidad
 					</button>
-					<a href="#" className="flex flex-col items-center">
-						Icono de enlace
+					<a href="#" className="text-lg flex flex-col items-center">
+							o unete a una
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="80"
@@ -49,7 +49,7 @@ const Landing = () => {
 
 				{/* Columna derecha */}
 				<div className="flex justify-center">
-					<img src={Image} alt="Imagen de tu Landing" className="max-h-96" />
+					<img src={Image} alt="Imagen de tu Landing" className="max-h-100" />
 				</div>
 			</div>
 		</div>
