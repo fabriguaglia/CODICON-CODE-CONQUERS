@@ -1,0 +1,11 @@
+.bg-primary-color{
+    background-color: var(--primary-color);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.bg-transparent{
+    background-color: transparent;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}

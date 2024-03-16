@@ -1,0 +1,8 @@
+
+.bg-light-color{
+    background-color: var(--background-color);
+}
+
+.bg-dark-color{
+    background-color: var(--contrast-color);
+}
