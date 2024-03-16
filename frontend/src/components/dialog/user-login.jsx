@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import AuthContext from "../../services/authcontext";
-import "./user-login.css";
+import "./user-form.css";
 import Image from "../../assets/principal-image.png";
 
 const UserLogin = ({ isOpen, onClose }) => {

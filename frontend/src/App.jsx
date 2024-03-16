@@ -2,7 +2,6 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import { AuthContextProvider } from './services/authcontext.jsx'
 import './App.css'
 import MainLayout from './layouts/main-layout/main.layout.jsx'
-import Login from './components/dialog/login.jsx'
 
 function App() {
 
