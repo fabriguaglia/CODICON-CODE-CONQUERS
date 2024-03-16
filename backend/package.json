@@ -1,13 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicacion backend de Code Conquers para el evento codicon 2024",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "code conquers",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.2",
     "mongoose-paginate-v2": "^1.8.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.0"
   }
 }
