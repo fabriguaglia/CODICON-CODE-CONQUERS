@@ -18,7 +18,7 @@ const MainLayout = () => {
                 <Landing/>
                 {/* El componente communityList se importa y se renderiza en el layout con los valores de title, items y backgroundColor
                 Este componente generara una lista de ItemList dependiendo de la cantidad de items que se le pasen */}
-                <CommunityList title={'Comunidades'} items={["","",""]} backgroundColor="bg-light-color"/>
+                <CommunityList title={'Comunidades'} items={["","","","","","","","","","",""]} backgroundColor="bg-light-color"/>
             </main>
             <footer>
                 {/* El componente Footer se importa y se renderiza en el layout */}
