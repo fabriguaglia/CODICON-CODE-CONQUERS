@@ -46,6 +46,7 @@ app.use(express.json());
  */
 app.use("/auth", require("./middleware/login"));
 app.use("/user", require("./routes/user"));
+app.use("/support", require("./routes/support"));
 //app.use(authenticate);
 app.use("/comunity", require("./routes/comunity"));
 app.use("/experience", require("./routes/experience"));
