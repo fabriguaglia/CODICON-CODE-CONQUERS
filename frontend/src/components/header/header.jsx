@@ -1,9 +1,20 @@
-import { useState, useEffect } from 'react';
-import Logo from '../../assets/principal-image.png';
-import './header.css'
+import { useState, useEffect } from "react";
+import Logo from "../../assets/principal-image.png";
+import "./header.css";
+import UserLogin from "../dialog/user-login";
 
 const Header = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
+
+	const [isLoginModal, setIsLoginModal] = useState(false);
+
+	const openLoginModal = () => {
+		setIsLoginModal(true);
+	};
+
+	const closeLoginModal = () => {
+		setIsLoginModal(false);
+	};
 
 	// Detectar el scroll del usuario
 	useEffect(() => {
@@ -16,44 +27,36 @@ const Header = () => {
 			}
 		};
 
-		window.addEventListener('scroll', handleScroll);
+		window.addEventListener("scroll", handleScroll);
 
 		return () => {
-			window.removeEventListener('scroll', handleScroll);
+			window.removeEventListener("scroll", handleScroll);
 		};
 	}, []);
 
-	const links = [
-		{ id: 1, name: "Iniciar Sesion", to: "/login" },
-		{ id: 2, name: "Registrarse", to: "/register" },
-		{ id: 3, name: "¿Quienes somos?", to: "/about" },
-		{ id: 4, name: "Soporte", to: "/support" },
-	]
-
 	const styles = {
 		div: "flex items-center",
-		links: "mr-4 cursor-pointer"
-	}
+		links: "mr-4 cursor-pointer",
+	};
 
 	return (
 		<header
-			className={`fixed w-full top-0 z-50 flex items-center justify-between px-4 py-2 ${isScrolled ? 'bg-primary-color' : 'bg-transparent'
-				}`}
+			className={`fixed w-full top-0 z-50 flex items-center justify-between px-4 py-2 ${
+				isScrolled ? "bg-primary-color" : "bg-transparent"
+			}`}
 		>
 			<div className={styles.div}>
 				<img src={Logo} alt="Logo" className="h-8 mr-2 cursor-pointer" />
 			</div>
 			<div className={styles.div}>
-				{links.map((link) => (
-					<a
-						key={link.id}
-						href={link.to}
-						className={styles.links}
-					>
-						{link.name}
-					</a>
-				))}
+				<button className={styles.links} onClick={openLoginModal}>
+					Iniciar sesión
+				</button>
+				<button className={styles.links}>Registrarse</button>
+				<button className={styles.links}>Quiénes somos</button>
+				<button className={styles.links}>Soporte</button>
 			</div>
+			<UserLogin isOpen={isLoginModal} onClose={closeLoginModal} />
 		</header>
 	);
 };
