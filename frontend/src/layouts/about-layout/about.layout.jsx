@@ -143,8 +143,8 @@ const AboutLayout = () => {
 					<div key={item.id} className={styles.div}>
 						<h1 className={styles.h1}>{item.title}</h1>
 						<div className={styles.div2} >
-							{item.icon}
 							<p className={styles.p}>{item.description}</p>
+							{item.icon}
 						</div>
 					</div>
 				))}
