@@ -1,26 +1,15 @@
 const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate-v2");
 
-const commentSchema = new mongoose.Schema({
+const invitationSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
 		default: "Anonimo",
 	},
-	experience_id: {
+	event_id: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: "Experience",
-		required: true,
-	},
-	message: {
-		type: String,
-		required: true,
-	},
-	audio: {
-		type: String,
-	},
-	limit: {
-		type: Number,
+		ref: "Event",
 		required: true,
 	},
 	date_create: {
@@ -34,8 +23,8 @@ const commentSchema = new mongoose.Schema({
 	},
 });
 
-commentSchema.plugin(paginate);
+invitationSchema.plugin(paginate);
 
-const Comment = mongoose.model("Comment", commentSchema);
+const Invitation = mongoose.model("Invitation", invitationSchema);
 
-module.exports = Comment;
+module.exports = Invitation;

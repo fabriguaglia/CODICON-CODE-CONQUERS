@@ -21,6 +21,10 @@ const experienceSchema = new mongoose.Schema({
 	audio: {
 		type: String,
 	},
+	limit: {
+		type: Number,
+		required: true,
+	},
 	date_create: {
 		type: Date,
 		default: Date.now,

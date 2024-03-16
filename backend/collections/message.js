@@ -5,7 +5,7 @@ const messageSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
-		default: "Anonimo",
+		required: true,
 	},
 	message: {
 		type: String,
