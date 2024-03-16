@@ -1,4 +1,4 @@
-import React from "react";
+import propTypes from "prop-types";
 
 const ItemList = ({ number, imageSrc, title, subtitle, isLocked }) => {
 	return (
@@ -28,5 +28,13 @@ const ItemList = ({ number, imageSrc, title, subtitle, isLocked }) => {
 		</div>
 	);
 };
+
+ItemList.propTypes = {
+	number: propTypes.number,
+	imageSrc: propTypes.string,
+	title: propTypes.string,
+	subtitle: propTypes.string,
+	isLocked: propTypes.bool,
+}
 
 export default ItemList;

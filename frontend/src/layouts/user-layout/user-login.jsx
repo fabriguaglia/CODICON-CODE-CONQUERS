@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { AuthContext } from "../../components/authcontext";
+import { AuthContext } from "../../services/authcontext";
 
 const UserLogin = () => {
 	const navigate = useNavigate();
