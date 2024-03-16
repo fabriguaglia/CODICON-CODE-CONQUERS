@@ -78,7 +78,7 @@ const UserLogin = ({ isOpen, onClose }) => {
 					<div className="flex justify-center">
 						<img src={Image} alt="Imagen de tu Landing" className="max-h-40" />
 					</div>
-					<form className="space-y-6" action="#" method="POST">
+					<form className="space-y-6" method="post" onSubmit={handleSubmit}>
 						<div>
 							<label
 								htmlFor="email"
@@ -91,6 +91,7 @@ const UserLogin = ({ isOpen, onClose }) => {
 									id="email"
 									name="email"
 									type="email"
+									onChange={handleChange}
 									autoComplete="email"
 									required
 									className={styles.input}
@@ -120,6 +121,7 @@ const UserLogin = ({ isOpen, onClose }) => {
 									id="password"
 									name="password"
 									type="password"
+									onChange={handleChange}
 									autoComplete="current-password"
 									required
 									className={styles.input}
