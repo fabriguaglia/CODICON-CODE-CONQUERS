@@ -2,6 +2,11 @@ const Experience = require("../collections/experience");
 const express = require("express");
 const routerExperience = express.Router();
 
+/**
+ * Get all experiences
+ * @route GET /experience
+ */
+
 routerExperience.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +28,11 @@ routerExperience.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new experience
+ * @route POST /experience
+ */
+
 routerExperience.post("/", async (req, res) => {
 	try {
 		const experience = new Experience(req.body);
@@ -32,6 +42,11 @@ routerExperience.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a experience
+ * @route PATCH /experience/:id
+ */
 
 routerExperience.patch("/:id", async (req, res) => {
 	try {
@@ -47,6 +62,11 @@ routerExperience.patch("/:id", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a experience
+ * @route DELETE /experience/:id
+ */
 
 routerExperience.delete("/:id", async (req, res) => {
 	try {

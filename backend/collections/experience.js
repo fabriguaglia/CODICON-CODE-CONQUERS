@@ -1,6 +1,20 @@
 const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate-v2");
 
+/**
+ * Experience
+ * @typedef Experience
+ * @property {string} user_id
+ * @property {string} comunity_id
+ * @property {string} comment_id
+ * @property {string} name
+ * @property {string} description
+ * @property {string} image_url
+ * @property {string} audio
+ * @property {number} limit
+ * @property {string} date_create
+ * @property {string} date_update
+ */
 const experienceSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,

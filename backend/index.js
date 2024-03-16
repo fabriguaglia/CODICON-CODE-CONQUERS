@@ -3,10 +3,19 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 //const authenticate = require("./middleware/authenticate");
 
+/**
+ * Load environment variables from .env file
+ */
 require("dotenv").config();
 
+/**
+ * configuracion de express
+ */
 const app = express();
 
+/**
+ * configuracion de cors
+ */
 const corsOptions = {
 	origin: "*",
 	optionsSuccessStatus: 200,
@@ -17,6 +26,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+/**
+ * Conexión a la base de datos
+ */
 mongoose
 	.connect(process.env.DATABASE_URL)
 	.then(() => {
@@ -28,6 +40,10 @@ mongoose
 
 app.use(express.static("/public"));
 app.use(express.json());
+
+/**
+ * iniciando las rutas
+ */
 app.use("/auth", require("./middleware/login"));
 app.use("/user", require("./routes/user"));
 //app.use(authenticate);
@@ -39,6 +55,9 @@ app.use("/event", require("./routes/event"));
 app.use("/invitation", require("./routes/invitation"));
 app.use("/reaction", require("./routes/reaction"));
 
+/**
+ * iniciando el servidor
+ */
 app.listen(3002, () => {
 	console.log("Server is running on port 3002");
 });

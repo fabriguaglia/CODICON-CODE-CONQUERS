@@ -2,6 +2,11 @@ const Event = require("../collections/event");
 const express = require("express");
 const routerEvent = express.Router();
 
+/**
+ * Get all events
+ * @route GET /event
+ */
+
 routerEvent.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +28,11 @@ routerEvent.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new event
+ * @route POST /event
+ */
+
 routerEvent.post("/", async (req, res) => {
 	try {
 		const event = new Event(req.body);
@@ -32,6 +42,11 @@ routerEvent.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a event
+ * @route PATCH /event/:id
+ * */
 
 routerEvent.patch("/:id", async (req, res) => {
 	try {
@@ -43,6 +58,11 @@ routerEvent.patch("/:id", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a event
+ * @route DELETE /event/:id
+ * */
 
 routerEvent.delete("/:id", async (req, res) => {
 	try {

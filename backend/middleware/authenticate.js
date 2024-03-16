@@ -8,6 +8,9 @@ const public = process.env.JWT_PUBLIC_KEY;
 const private = process.env.JWT_PRIVATE_KEY;
 const algorithms = process.env.JWT_ALGORITHM || "RS256";
 
+/**
+ * configure passport with jwt strategy
+ */
 passport.use(
 	new JwtStrategy(
 		{
@@ -30,6 +33,13 @@ passport.use(
 		}
 	)
 );
+
+/**
+ * serialize user id
+ * @param {object} user
+ * @returns {object} user
+ * @returns {string} user.id
+ * */
 
 const authenticate = async (req, res, next) => {
 	const token = req.headers.authorization;

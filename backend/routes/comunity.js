@@ -3,6 +3,11 @@ const express = require("express");
 const routerComunity = express.Router();
 const upload = require("../middleware/upload");
 
+/**
+ * Get all comunities
+ * @route GET /comunity
+ * */
+
 routerComunity.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +28,11 @@ routerComunity.get("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Create a new comunity
+ * @route POST /comunity
+ * */
 
 routerComunity.post("/", upload.single("image_url"), async (req, res) => {
 	try {
@@ -45,6 +55,11 @@ routerComunity.post("/", upload.single("image_url"), async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a comunity
+ * @route PATCH /comunity/:id
+ * */
 
 routerComunity.patch("/:id", upload.single("image_url"), async (req, res) => {
 	try {
@@ -77,6 +92,11 @@ routerComunity.patch("/:id", upload.single("image_url"), async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a comunity
+ * @route DELETE /comunity/:id
+ * */
 
 routerComunity.delete("/:id", async (req, res) => {
 	try {

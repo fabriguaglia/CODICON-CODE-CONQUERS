@@ -2,6 +2,11 @@ const Message = require("../collections/message");
 const express = require("express");
 const routerMessage = express.Router();
 
+/**
+ * Get all messages
+ * @route GET /message
+ */
+
 routerMessage.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +28,11 @@ routerMessage.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new message
+ * @route POST /message
+ */
+
 routerMessage.post("/", async (req, res) => {
 	try {
 		const message = new Message(req.body);
@@ -32,6 +42,11 @@ routerMessage.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a message
+ * @route PATCH /message/:id
+ */
 
 routerMessage.patch("/:id", async (req, res) => {
 	try {
@@ -43,6 +58,11 @@ routerMessage.patch("/:id", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a message
+ * @route DELETE /message/:id
+ */
 
 routerMessage.delete("/:id", async (req, res) => {
 	try {

@@ -1,6 +1,27 @@
 const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate-v2");
 
+/**
+ * Event
+ * @typedef Event
+ * @property {string} name
+ * @property {string} description
+ * @property {string} image_url
+ * @property {string} audio
+ * @property {number} limit
+ * @property {string} date_start
+ * @property {string} date_end
+ * @property {boolean} stream
+ * @property {string} country
+ * @property {string} city
+ * @property {string} address
+ * @property {string} phone
+ * @property {User} user_id
+ * @property {Comunity} comunity_id
+ * @property {string} date_create
+ * @property {string} date_update
+ */
+
 const eventSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -44,15 +65,15 @@ const eventSchema = new mongoose.Schema({
 	phone: {
 		type: String,
 	},
-	user_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
-		required: true,
-	},
+	user_id: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+		},
+	],
 	comunity_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Comunity",
-		required: true,
 	},
 	date_create: {
 		type: Date,
