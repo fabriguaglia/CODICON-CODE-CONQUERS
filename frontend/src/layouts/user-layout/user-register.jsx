@@ -1,14 +1,17 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import axios from "axios";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../components/authcontext";
 
-const UserLogin = () => {
+const UserRegister = () => {
+
 	const navigate = useNavigate();
 	const [user, setUser] = useState({
 		"email": "",
 		"password": "",
+		"username": "",
+		"age": 0
 	})
 
 	const { setToken } = useContext(AuthContext);
@@ -24,18 +27,20 @@ const UserLogin = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		try {
-			axios.post("http://localhost:3001/auth/login", user)
+			axios.post("http://localhost:3001/auth/register", user)
 				.then((response) => {
 					Swal.fire({
-						title: 'Login Correcto',
-						text: 'Has iniciado sesion',
+						title: 'Registro Correcto',
+						text: 'Has registrado',
 						icon: 'success',
 						confirmButtonText: 'Ok'
 					})
 					const token = response.data.token;
 					const user_id = response.data.user_id;
+
 					setToken(token);
 					setUserId(user_id);
+
 					navigate("/");
 				}).catch((error) => {
 					Swal.fire({
@@ -59,13 +64,40 @@ const UserLogin = () => {
 	}
 
 	return (
-		<form className={styles.form} method="post" onSubmit={handleSubmit}>
-			<h1>Inicia Sesion</h1>
-			<input type="text" name="email" onChange={handleChange} placeholder="Correo Electronico" />
-			<input type="password" name="password" onChange={handleChange} placeholder="Contraseña" />
-			<input type="submit" value="Iniciar Sesion" />
+		<form action="" className={styles.form} onSubmit={handleSubmit}>
+			<h1 className={styles.h1}>Registrate y Transmite tu Experiencia</h1>
+			<input
+				className={styles.input}
+				type="text"
+				name="username"
+				placeholder="Nombre de usuario"
+				onChange={handleChange}
+			/>
+			<input
+				className={styles.input}
+				type="email"
+				name="email"
+				placeholder="Correo Electronico"
+				onChange={handleChange}
+			/>
+			<input
+				className={styles.input}
+				type="password"
+				name="password"
+				placeholder="Contraseña"
+				onChange={handleChange}
+			/>
+			<input
+				className={styles.input}
+				type="number"
+				name="age"
+				placeholder="Edad"
+				onChange={handleChange}
+			/>
+
+			<input className={styles.submit} type="submit" value="Registrarse" />
 		</form>
 	)
 }
 
-export default UserLogin
+export default UserRegister
