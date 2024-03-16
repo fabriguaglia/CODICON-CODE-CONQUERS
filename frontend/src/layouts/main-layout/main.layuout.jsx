@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../components/footer/footer';
 
 const MainLayout = () => {
     return (
@@ -10,7 +11,7 @@ const MainLayout = () => {
                 {/* Contenido del cuerpo */}
             </main>
             <footer>
-                {/* Contenido del pie de página */}
+                <Footer/>
             </footer>
         </div>
     );

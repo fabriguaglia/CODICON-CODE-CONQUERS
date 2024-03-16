@@ -1,0 +1,14 @@
+.parent {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 512px;
+    width: 100vw;
+    background-color: --secondary-color;
+    color: white;
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
