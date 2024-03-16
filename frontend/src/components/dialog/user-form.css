@@ -1,0 +1,11 @@
+.bg-contrast-color{
+    background-color: var(--contrast-color);
+}
+
+.bg-secondary-color{
+    background-color: var(--secondary-color);
+}
+
+.text-background-color{
+    color: var(--background-color);
+}
