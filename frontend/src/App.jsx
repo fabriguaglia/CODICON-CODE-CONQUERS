@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <MainLayout />
+      <h1 className="text-4xl font-bold text-center text-blue-500">Hello World</h1>
     </>
   )
 }
