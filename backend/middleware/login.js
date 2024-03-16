@@ -98,6 +98,52 @@ routerAuth.post("/login", async (req, res, next) => {
 	})(req, res, next);
 });
 
+routerAuth.post("/register", async (req, res) => {
+	try {
+		passport.authenticate("local", async (err, user, info) => {
+			if (err) {
+				return res.status(500).json({
+					message: "Internal Server Error",
+				});
+			}
+
+			if (!user) {
+				const user = await User.create({
+					username: req.body.username,
+					email: req.body.email,
+					password: req.body.password,
+					age: req.body.age,
+				});
+
+				const tokenData = {
+					user_id: user._id,
+					username: user.username,
+					email: user.email,
+					age: user.age,
+				};
+
+				const token = jwt.sign(tokenData, privateKey, { algorithm });
+
+				const user_id = user._id;
+
+				return res.status(200).json({
+					message: "Registration Successful",
+					token,
+					user_id,
+				});
+			} else {
+				return res.status(409).json({
+					message: "User already exists",
+				});
+			}
+		});
+	} catch (error) {
+		return res.status(500).json({
+			message: "Internal Server Error",
+		});
+	}
+});
+
 // logout and destroy session
 routerAuth.post("/logout", (req, res) => {
 	try {
