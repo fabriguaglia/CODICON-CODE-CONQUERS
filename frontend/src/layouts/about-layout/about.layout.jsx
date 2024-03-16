@@ -67,11 +67,11 @@ const AboutLayout = () => {
 			id: 2,
 			name: "Carlos",
 			img_profile: <img src={carlos} className="h-[125px] w-[125px] rounded-full" alt="" />,
-			role: "Full Stack Developer",
-			description: "Soy un experto en desarrollo de software con experiencia en JavaScript, React, Node.js y Threejs.",
-			instagram: "",
+			role: "Front end Developer",
+			description: "Memorista de Ingenieria en computacion, desarrollador front end con nociones de back y devops. En este proyecto me encargué del frontend y el diseño de la red social",
+			instagram: "tcarloh",
 			linkdin: "",
-			github: ""
+			github: "quezandoc"
 		},
 		{
 			id: 3,
