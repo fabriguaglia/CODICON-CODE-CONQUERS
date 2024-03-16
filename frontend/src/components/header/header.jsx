@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '../../assets/principal-image.png';
 import './header.css'
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -45,13 +46,13 @@ const Header = () => {
 			</div>
 			<div className={styles.div}>
 				{links.map((link) => (
-					<a
+					<Link
 						key={link.id}
-						href={link.to}
+						to={link.to}
 						className={styles.links}
 					>
 						{link.name}
-					</a>
+					</Link>
 				))}
 			</div>
 		</header>
