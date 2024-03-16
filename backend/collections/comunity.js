@@ -29,6 +29,12 @@ const comunitySchema = new mongoose.Schema({
 		type: Boolean,
 		default: false,
 	},
+	reactions: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Reaction",
+		},
+	],
 	date_create: {
 		type: Date,
 		default: Date.now,

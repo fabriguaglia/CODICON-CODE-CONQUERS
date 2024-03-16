@@ -18,6 +18,12 @@ const experienceSchema = new mongoose.Schema({
 			ref: "Comment",
 		},
 	],
+	reacions: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Reaction",
+		},
+	],
 	name: {
 		type: String,
 		required: true,
