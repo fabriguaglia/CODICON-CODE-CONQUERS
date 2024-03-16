@@ -1,4 +1,3 @@
-import React from "react";
 import BackgroundImage from "../../assets/bg-image.png";
 import Image from "../../assets/principal-image.png";
 
@@ -21,7 +20,7 @@ const Landing = () => {
 						¡Acción!
 					</button>
 					<a href="#" className="flex flex-col items-center">
-                        Icono de enlace
+						Icono de enlace
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="80"
