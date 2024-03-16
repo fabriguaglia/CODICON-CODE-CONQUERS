@@ -14,10 +14,10 @@ const MainLayout = () => {
 			<main>
 				{/* El componente Landing se importa y se renderiza en el layout
                     Este es el HERO de la aplicacion */}
-				<Landing />
+				<Landing userLogged={false}/>
 				{/* El componente communityList se importa y se renderiza en el layout con los valores de title, items y backgroundColor
                 Este componente generara una lista de ItemList dependiendo de la cantidad de items que se le pasen */}
-				<CommunityList title={'Comunidades'} items={["", "", "", "", "", "", "", "", "", "", ""]} backgroundColor="bg-light-color" />
+				<CommunityList items={["", "", "", "", "", "", "", "", "", "", ""]} backgroundColor="bg-light-color" />
 			</main>
 			<footer>
 				{/* El componente Footer se importa y se renderiza en el layout */}
