@@ -24,7 +24,7 @@ const AboutLayout = () => {
 			id: 1,
 			title: "¿Quiene somos?",
 			description: "En Transmivencia, creemos en la creación de un mundo más inclusivo y accesible para todos. Nuestra historia comenzó como una idea nacida durante un concurso de programación, la CODICON 2024, donde nos propusimos encontrar soluciones innovadoras para promover la inclusión y la diversidad en la tecnología. La palabra clave del concurso fue TRANSMISION.",
-			icon: <img src={Codicon} alt="" />
+			icon: <img src={Codicon} className="rounded-3xl" alt="" />
 		},
 		{
 			id: 2,
@@ -143,8 +143,8 @@ const AboutLayout = () => {
 					<div key={item.id} className={styles.div}>
 						<h1 className={styles.h1}>{item.title}</h1>
 						<div className={styles.div2} >
-							{item.icon}
 							<p className={styles.p}>{item.description}</p>
+							{item.icon}
 						</div>
 					</div>
 				))}
