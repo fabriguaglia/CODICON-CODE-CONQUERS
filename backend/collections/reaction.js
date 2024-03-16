@@ -1,6 +1,14 @@
 const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate-v2");
 
+/**
+ * Reaction
+ * @typedef Reaction
+ * @property {string} reaction
+ * @property {string} date_create
+ * @property {string} date_update
+ */
+
 const reactionSchema = new mongoose.Schema({
 	reaction: {
 		type: String,

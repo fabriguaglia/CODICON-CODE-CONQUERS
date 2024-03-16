@@ -1,6 +1,10 @@
 const multer = require("multer");
 const path = require("path");
 
+/**
+ * Set the storage location
+ * */
+
 const storage = multer.diskStorage({
 	destination: "public/images",
 	filename: (req, file, cb) => {
@@ -10,6 +14,10 @@ const storage = multer.diskStorage({
 		);
 	},
 });
+
+/**
+ * Check if the file is an image
+ */
 
 const fileFilter = (req, file, cb) => {
 	if (
@@ -25,6 +33,11 @@ const fileFilter = (req, file, cb) => {
 		cb(error);
 	}
 };
+
+/**
+ * Upload a file to the server
+ * @route POST /upload
+ * */
 
 const upload = multer({
 	storage: storage,

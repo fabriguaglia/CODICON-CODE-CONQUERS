@@ -73,7 +73,7 @@ routerAuth.post("/login", async (req, res, next) => {
 
 			// create data for token
 			const tokenData = {
-				customer_id: user._id,
+				user: user._id,
 				username: user.username,
 				email: user.email,
 			};
@@ -100,45 +100,42 @@ routerAuth.post("/login", async (req, res, next) => {
 
 routerAuth.post("/register", async (req, res) => {
 	try {
-		passport.authenticate("local", async (err, user, info) => {
-			if (err) {
-				return res.status(500).json({
-					message: "Internal Server Error",
-				});
-			}
+		// Verificar si el usuario ya existe
+		const existingUser = await User.findOne({ email: req.body.email });
+		if (existingUser) {
+			return res.status(409).json({
+				message: "User already exists",
+			});
+		}
 
-			if (!user) {
-				const user = await User.create({
-					username: req.body.username,
-					email: req.body.email,
-					password: req.body.password,
-					age: req.body.age,
-				});
+		// Crear el usuario si no existe
+		const newUser = await User.create({
+			username: req.body.username,
+			email: req.body.email,
+			password: req.body.password, // Asegúrate de hashear esta contraseña
+			age: req.body.age,
+		});
 
-				const tokenData = {
-					user_id: user._id,
-					username: user.username,
-					email: user.email,
-					age: user.age,
-				};
+		// Crear los datos para el token
+		const tokenData = {
+			user_id: newUser._id,
+			username: newUser.username,
+			email: newUser.email,
+			age: newUser.age,
+		};
 
-				const token = jwt.sign(tokenData, privateKey, { algorithm });
+		// Firmar el token
+		const token = jwt.sign(tokenData, privateKey, { algorithm });
 
-				const user_id = user._id;
-
-				return res.status(200).json({
-					message: "Registration Successful",
-					token,
-					user_id,
-				});
-			} else {
-				return res.status(409).json({
-					message: "User already exists",
-				});
-			}
+		// Responder con éxito
+		res.status(200).json({
+			message: "Registration Successful",
+			token,
+			user_id: newUser._id,
 		});
 	} catch (error) {
-		return res.status(500).json({
+		console.error("Error during registration:", error);
+		res.status(500).json({
 			message: "Internal Server Error",
 		});
 	}

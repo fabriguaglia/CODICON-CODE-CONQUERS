@@ -2,6 +2,13 @@ const User = require("../collections/user");
 const express = require("express");
 const routerUser = express.Router();
 
+/**
+ * Get all users
+ * @route GET /user
+ * @group User - Operations about user
+ * @returns {object} 200 - An array of users
+ */
+
 routerUser.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -28,6 +35,11 @@ routerUser.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new user
+ * @route POST /user
+ */
+
 routerUser.post("/", async (req, res) => {
 	try {
 		const user = new User(req.body);
@@ -37,6 +49,11 @@ routerUser.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a user
+ * @route PATCH /user/:id
+ */
 
 routerUser.patch("/:id", async (req, res) => {
 	try {
@@ -48,6 +65,11 @@ routerUser.patch("/:id", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a user
+ * @route DELETE /user/:id
+ */
 
 routerUser.delete("/:id", async (req, res) => {
 	try {

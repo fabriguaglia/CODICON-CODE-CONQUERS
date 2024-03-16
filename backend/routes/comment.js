@@ -2,6 +2,11 @@ const Comment = require("../collections/comment");
 const express = require("express");
 const routerComment = express.Router();
 
+/**
+ * Get all comments
+ * @route GET /comment
+ */
+
 routerComment.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +28,11 @@ routerComment.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new comment
+ * @route POST /comment
+ * */
+
 routerComment.post("/", async (req, res) => {
 	try {
 		const comment = new Comment(req.body);
@@ -32,6 +42,11 @@ routerComment.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a comment
+ * @route PATCH /comment/:id
+ * */
 
 routerComment.patch("/:id", async (req, res) => {
 	try {
@@ -43,6 +58,11 @@ routerComment.patch("/:id", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Delete a comment
+ * @route DELETE /comment/:id
+ * */
 
 routerComment.delete("/:id", async (req, res) => {
 	try {

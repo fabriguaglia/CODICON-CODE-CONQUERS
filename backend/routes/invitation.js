@@ -2,6 +2,10 @@ const Invitation = require("../collections/invitation");
 const express = require("express");
 const routerInvitation = express.Router();
 
+/**
+ * Get all invitations
+ * @route GET /invitation
+ */
 routerInvitation.get("/", async (req, res) => {
 	try {
 		const options = {
@@ -23,6 +27,11 @@ routerInvitation.get("/", async (req, res) => {
 	}
 });
 
+/**
+ * Create a new invitation
+ * @route POST /invitation
+ */
+
 routerInvitation.post("/", async (req, res) => {
 	try {
 		const invitation = new Invitation(req.body);
@@ -32,6 +41,11 @@ routerInvitation.post("/", async (req, res) => {
 		res.status(500).json(error);
 	}
 });
+
+/**
+ * Update a invitation
+ * @route PATCH /invitation/:id
+ */
 
 routerInvitation.patch("/:id", async (req, res) => {
 	try {
@@ -48,6 +62,10 @@ routerInvitation.patch("/:id", async (req, res) => {
 	}
 });
 
+/**
+ * Delete a invitation
+ * @route DELETE /invitation/:id
+ */
 routerInvitation.delete("/:id", async (req, res) => {
 	try {
 		const invitation = await Invitation.findByIdAndDelete(req.params.id);
