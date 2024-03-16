@@ -1,6 +1,6 @@
-import React from "react";
 import ItemList from "./item-list";
 import Image from "../../assets/principal-image.png";
+import propTypes from "prop-types";
 
 const CommunityList = ({ title, items, backgroundColor }) => {
 	return (
@@ -8,11 +8,12 @@ const CommunityList = ({ title, items, backgroundColor }) => {
 		<div className={`max-w-full mx-auto px-4 py-8 ${backgroundColor} flex flex-col items-center`}>
 			<h2 className="text-2xl font-bold mb-4">{title}</h2>
 			<div className={`flex flex-col justify-around`}>
-			{/* Genera una grilla de 1 o 2 columnas dependiendo del tamaño de la pantalla */}
+				{/* Genera una grilla de 1 o 2 columnas dependiendo del tamaño de la pantalla */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{/* Se genera un ItemList por cada item que se le pase */}
 					{items.map((item, index) => (
 						<ItemList
+							key={index}
 							number={index + 1}
 							imageSrc={Image}
 							title="Titulo"
@@ -29,5 +30,11 @@ const CommunityList = ({ title, items, backgroundColor }) => {
 		</div>
 	);
 };
+
+CommunityList.propTypes = {
+	title: propTypes.string.isRequired,
+	items: propTypes.array.isRequired,
+	backgroundColor: propTypes.string
+}
 
 export default CommunityList;
