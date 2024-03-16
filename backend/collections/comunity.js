@@ -18,6 +18,10 @@ const comunitySchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
+	state: {
+		type: Boolean,
+		default: false,
+	},
 	date_create: {
 		type: Date,
 		default: Date.now,
