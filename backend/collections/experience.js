@@ -19,12 +19,10 @@ const experienceSchema = new mongoose.Schema({
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
-		default: "Anonimo",
 	},
 	comunity_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Comunity",
-		required: true,
 	},
 	comment_id: [
 		{
@@ -55,6 +53,10 @@ const experienceSchema = new mongoose.Schema({
 	limit: {
 		type: Number,
 		required: true,
+	},
+	anonimo: {
+		type: Boolean,
+		default: false,
 	},
 	date_create: {
 		type: Date,
