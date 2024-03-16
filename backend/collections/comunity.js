@@ -8,6 +8,11 @@ const comunitySchema = new mongoose.Schema({
 		required: true,
 		inmutable: true,
 	},
+	Comunity_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Comunity",
+		default: "Anonimo",
+	},
 	name: {
 		type: String,
 		required: true,
