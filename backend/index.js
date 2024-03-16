@@ -30,6 +30,7 @@ app.use(express.json());
 app.use("/auth", require("./middleware/login"));
 app.use("/user", require("./routes/user"));
 app.use(authenticate);
+app.use("/comunity", require("./routes/comunity"));
 
 app.listen(3002, () => {
 	console.log("Server is running on port 3002");

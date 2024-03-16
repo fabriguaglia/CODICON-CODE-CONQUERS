@@ -7,11 +7,6 @@ const commentSchema = new mongoose.Schema({
 		ref: "User",
 		default: "Anonimo",
 	},
-	experience_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "Experience",
-		required: true,
-	},
 	message: {
 		type: String,
 		required: true,

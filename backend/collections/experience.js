@@ -12,6 +12,12 @@ const experienceSchema = new mongoose.Schema({
 		ref: "Comunity",
 		required: true,
 	},
+	coment_id: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Comment",
+		},
+	],
 	name: {
 		type: String,
 		required: true,
