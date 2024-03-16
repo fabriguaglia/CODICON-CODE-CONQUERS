@@ -31,7 +31,7 @@ const UserRegister = ({ isOpen, onClose }) => {
 		event.preventDefault();
 		try {
 			axios
-				.post("http://localhost:3001/auth/register", user)
+				.post("http://localhost:3002/auth/register", user)
 				.then((response) => {
 					Swal.fire({
 						title: "Registro Correcto",
@@ -113,6 +113,12 @@ const UserRegister = ({ isOpen, onClose }) => {
 								onChange={handleChange}
 							/>
 						</div>
+						<button
+							type="submit"
+							className="flex w-full justify-center rounded-md bg-secondary-color px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+						>
+							Registrate
+						</button>
 					</form>
 
 					<button

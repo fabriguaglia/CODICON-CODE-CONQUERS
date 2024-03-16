@@ -29,7 +29,7 @@ const UserLogin = ({ isOpen, onClose }) => {
 		event.preventDefault();
 		try {
 			axios
-				.post("http://localhost:3001/auth/login", user)
+				.post("http://localhost:3002/auth/login", user)
 				.then((response) => {
 					Swal.fire({
 						title: "Login Correcto",
