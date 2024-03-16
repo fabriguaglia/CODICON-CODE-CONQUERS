@@ -3,6 +3,7 @@ import { AuthContextProvider } from './services/authcontext.jsx'
 import './App.css'
 import MainLayout from './layouts/main-layout/main.layout.jsx'
 import AboutLayout from './layouts/about-layout/about.layout.jsx'
+import ProtectedRouter from './services/protected.router.jsx'
 
 function App() {
 
@@ -12,6 +13,10 @@ function App() {
 				<Routes>
 					<Route path="/" element={<MainLayout />} />
 					<Route path="/about" element={<AboutLayout />} />
+
+					<Route element={<ProtectedRouter />} >
+
+					</Route>
 				</Routes>
 			</AuthContextProvider>
 		</HashRouter>
