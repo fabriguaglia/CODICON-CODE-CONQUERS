@@ -55,7 +55,7 @@ const AboutLayout = () => {
 	const team = [
 		{
 			id: 1,
-			name: "Gabriel Palmar",
+			name: "Gabriel",
 			img_profile: <img src={Gabo} className="h-[125px] w-[125px] rounded-full" alt="" />,
 			role: "Full Stack Developer",
 			description: "Soy un experto en desarrollo de software con experiencia en JavaScript, React, Node.js y Threejs. En este proyecto me encargué del backend.",
