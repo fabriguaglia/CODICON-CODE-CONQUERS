@@ -1,6 +1,7 @@
 const Community = require("../collections/comunity");
 const express = require("express");
 const routerComunity = express.Router();
+const upload = require("../middleware/upload");
 
 routerComunity.get("/", async (req, res) => {
 	try {
@@ -23,26 +24,55 @@ routerComunity.get("/", async (req, res) => {
 	}
 });
 
-routerComunity.post("/", async (req, res) => {
+routerComunity.post("/", upload.single("image_url"), async (req, res) => {
 	try {
-		const comunity = new Community(req.body);
-		await comunity.save();
-		res.status(201).json(comunity);
+		if (!req.file) {
+			const comunity = new Community(req.body);
+			await comunity.save();
+			res.status(201).json(comunity);
+		} else {
+			const comunity = new Community({
+				user_id: req.body.user_id,
+				name: req.body.name,
+				image_url: req.file.path,
+				description: req.body.description,
+				limit: req.body.limit,
+			});
+			await comunity.save();
+			res.status(201).json(comunity);
+		}
 	} catch (error) {
 		res.status(500).json(error);
 	}
 });
 
-routerComunity.patch("/:id", async (req, res) => {
+routerComunity.patch("/:id", upload.single("image_url"), async (req, res) => {
 	try {
-		const comunity = await Community.findByIdAndUpdate(
-			req.params.id,
-			req.body,
-			{
-				new: true,
-			}
-		);
-		res.status(200).json(comunity);
+		if (!req.file) {
+			const comunity = await Community.findByIdAndUpdate(
+				req.params.id,
+				req.body,
+				{
+					new: true,
+				}
+			);
+			res.status(200).json(comunity);
+		} else {
+			const comunity = await Community.findByIdAndUpdate(
+				req.params.id,
+				{
+					user_id: req.body.user_id,
+					name: req.body.name,
+					image_url: req.file.path,
+					description: req.body.description,
+					limit: req.body.limit,
+				},
+				{
+					new: true,
+				}
+			);
+			res.status(200).json(comunity);
+		}
 	} catch (error) {
 		res.status(500).json(error);
 	}

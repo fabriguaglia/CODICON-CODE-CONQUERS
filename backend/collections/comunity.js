@@ -19,6 +19,7 @@ const comunitySchema = new mongoose.Schema({
 	},
 	image_url: {
 		type: String,
+		default: "/images/logo.webp",
 	},
 	limit: {
 		type: Number,

@@ -26,6 +26,7 @@ mongoose
 		console.log(err);
 	});
 
+app.use(express.static("/public"));
 app.use(express.json());
 app.use("/auth", require("./middleware/login"));
 app.use("/user", require("./routes/user"));
@@ -36,6 +37,7 @@ app.use("/comment", require("./routes/comment"));
 app.use("/message", require("./routes/message"));
 app.use("/event", require("./routes/event"));
 app.use("/invitation", require("./routes/invitation"));
+app.use("/reaction", require("./routes/reaction"));
 
 app.listen(3002, () => {
 	console.log("Server is running on port 3002");
