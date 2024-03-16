@@ -8,7 +8,7 @@ const comunitySchema = new mongoose.Schema({
 		required: true,
 		inmutable: true,
 	},
-	Comunity_id: {
+	comunity_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Comunity",
 		default: "Anonimo",
