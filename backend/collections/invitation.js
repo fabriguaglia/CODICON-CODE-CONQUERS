@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate-v2");
 
 const invitationSchema = new mongoose.Schema({
-	user_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "User",
-		default: "Anonimo",
-	},
+	user_id: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			default: "Anonimo",
+		},
+	],
 	event_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Event",
