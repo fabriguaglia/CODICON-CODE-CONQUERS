@@ -1,14 +1,16 @@
 import React from 'react';
 import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import Landing from '../../components/landing/landing';
 
 const MainLayout = () => {
     return (
         <div>
             <header>
-                {/* Contenido del encabezado */}
+                <Header/>
             </header>
             <main>
-                {/* Contenido del cuerpo */}
+                <Landing/>
             </main>
             <footer>
                 <Footer/>
