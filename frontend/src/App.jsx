@@ -1,5 +1,5 @@
 import './App.css'
-import MainLayout from './layouts/main-layout/main.layuout.jsx'
+import MainLayout from './layouts/main-layout/main.layout.jsx'
 
 
 function App() {

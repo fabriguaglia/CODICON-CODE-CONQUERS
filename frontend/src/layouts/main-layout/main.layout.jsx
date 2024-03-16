@@ -2,6 +2,8 @@ import React from 'react';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Landing from '../../components/landing/landing';
+import CommunityList from '../../components/community-list/community-list';
+import './main.layout.css';
 
 const MainLayout = () => {
     return (
@@ -11,6 +13,7 @@ const MainLayout = () => {
             </header>
             <main>
                 <Landing/>
+                <CommunityList title={'Comunidades'} items={["","",""]} backgroundColor="bg-light-color"/>
             </main>
             <footer>
                 <Footer/>
