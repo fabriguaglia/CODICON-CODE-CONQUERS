@@ -1,17 +1,19 @@
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import { AuthContextProvider } from './components/auth-context.jsx'
 import './App.css'
 import MainLayout from './layouts/main-layout/main.layuout.jsx'
-import { HashRouter, Routes, Route } from 'react-router-dom'
-
 
 function App() {
 
 	return (
 		<HashRouter>
-			<Routes>
-				<Route path="/" element={<MainLayout />} />
-			</Routes>
+			<AuthContextProvider>
+				<Routes>
+					<Route path="/" element={<MainLayout />} />
+				</Routes>
+			</AuthContextProvider>
 		</HashRouter>
 	)
 }
 
-export default App
+export default App;
