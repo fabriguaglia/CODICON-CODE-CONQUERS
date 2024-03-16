@@ -13,7 +13,6 @@ const comunitySchema = new mongoose.Schema({
 	},
 	image_url: {
 		type: String,
-		required: true,
 	},
 	limit: {
 		type: Number,

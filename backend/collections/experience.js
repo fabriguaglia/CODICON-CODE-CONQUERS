@@ -7,6 +7,11 @@ const experienceSchema = new mongoose.Schema({
 		ref: "User",
 		default: "Anonimo",
 	},
+	comunity_id: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Comunity",
+		required: true,
+	},
 	name: {
 		type: String,
 		required: true,
