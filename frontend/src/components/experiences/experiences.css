@@ -1,7 +1,7 @@
 .line{
-    top: 50%;
+    bot: 0;
     left: 50%;
     position: absolute;
-    height: 70%;
+    height: calc(100% - 40px);
     border-left: 2px solid #f1f1f1;
 }

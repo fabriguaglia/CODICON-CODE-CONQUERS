@@ -74,13 +74,8 @@ const ExperienceList = ({ backgroundColor }) => {
 					{Array.isArray(experience) && experience.map((item, index) => (
 						<ExperiencePreview
 							key={index}
-							name={item.name}
-							description={item.description}
-							comunity_id={comunity._id}
-							experience_id={item._id}
-							state={item.state}
-							reactions={item.reactions}
-							comments={item.comments}
+							index={index}
+							experience={item}
 						/>
 					))}
 				</div>

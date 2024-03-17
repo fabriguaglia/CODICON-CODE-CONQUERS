@@ -5,57 +5,11 @@ import './experiences.css';
 import axios from "axios";
 
 const ExperiencePreview = ({
-	user_id,
-	comunity_id,
-	comment_id,
-	reactions,
-	name,
-	description,
-	experience_image,
-	audio,
-	limit,
-	anonimo,
-	hashtags,
+	index,
+	experience,
+	comunity
 }) => {
 
-	const [user, setUser] = useState({});
-	const [comunity, setComunity] = useState({});
-	const [comment, setComment] = useState({});
-	const [reaction, setReaction] = useState({});
-
-	useEffect(() => {
-		axios
-			.get(`http://localhost:3002/user/?_id=${user_id}`)
-			.then((response) => {
-				setUser(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [user_id]);
-
-	useEffect(() => {
-		axios
-			.get(`http://localhost:3002/comunity/?_id=${comunity_id}`)
-			.then((response) => {
-				setComunity(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [comunity_id]);
-
-	useEffect(() => {
-		const arr = Array.isArray(comment_id) ? comment_id : [];
-		axios
-			.get(`http://localhost:3002/comment/?_id=${arr[0]}`)
-			.then((response) => {
-				setComment(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [comment_id]);
 
 	return (
 		<div className="m-4">
@@ -71,18 +25,19 @@ const ExperiencePreview = ({
 				<div className={`w-full col-4 px-2`}>
 					<div className="flex justify-between items-center">
 						<h3 className="col-span-2 text-md font-medium mr-4 text-white">
-							{ }
+							{ experience.name }
+							
 						</h3>
 						<p className="col-span-2 text-sm text-white">
-							{ }
+							32 min
 						</p>
 					</div>
-					<p className="col-span-2 text-white">{ }</p>
+					<p className="col-span-2 max-h-24 overflow-hidden text-ellipsis text-white">{ experience.description }</p>
 					<button className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center ">
 						Seguir leyendo
 					</button>
-					<div className="flex justify-start mr-4 items-center">
-						{hashtags.map((hashtag, index) => (
+					<div className="flex justify-start mr-4 items-center overflow-hidden text-ellipsis">
+						{experience.hashtags.map((hashtag, index) => (
 							<span key={index} className="text-white font-bold">
 								{hashtag}
 							</span>
@@ -91,7 +46,8 @@ const ExperiencePreview = ({
 				</div>
 			</div>
 			<div className={`w-full flex flex-row justify-between`}>
-
+				{commentsImage()}
+				{tools()}
 			</div>
 		</div>
 	);
