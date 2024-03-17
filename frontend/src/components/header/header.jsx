@@ -4,7 +4,7 @@ import Logo from "../../assets/principal-image.png";
 import "./header.css";
 import UserLogin from "../dialog/user-login";
 import UserRegister from "../dialog/user-register";
-import { Link } from "react-router-dom";
+import propTypes from "prop-types";
 
 const Header = ({ green }) => {
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -45,6 +45,7 @@ const Header = ({ green }) => {
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 		};
+		// eslint-disable-next-line
 	}, []);
 
 	const links = [
@@ -98,5 +99,10 @@ const Header = ({ green }) => {
 		</header>
 	);
 };
+
+Header.propTypes = {
+	green: propTypes.bool,
+};
+
 
 export default Header;
