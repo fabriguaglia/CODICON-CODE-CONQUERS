@@ -76,7 +76,7 @@ const ExperienceList = ({ backgroundColor }) => {
 							key={index}
 							name={item.name}
 							description={item.description}
-							comunity_id={comunity._id}
+							comunity_id={item.comunity_id}
 							experience_id={item._id}
 							experience_image={item.experience_image}
 							anonimo={item.anonimo}

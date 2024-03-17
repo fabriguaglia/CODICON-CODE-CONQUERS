@@ -18,7 +18,6 @@ const ExperiencePreview = ({
 	anonimo,
 	hashtags = [],
 }) => {
-
 	const [user, setUser] = useState({});
 	const [comunity, setComunity] = useState({});
 	const [comment, setComment] = useState({});
@@ -43,26 +42,18 @@ const ExperiencePreview = ({
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3002/comunity/?_id=${comunity_id}`)
+			.get(`http://localhost:3002/comunity/`)
 			.then((response) => {
-				setComunity(response.data.docs[0]);
+				const communities = response.data.docs;
+				// Buscar la comunidad con el ID que coincide con comunity_id
+				const matchingCommunity = communities.find(community => community._id === comunity_id);
+				// Actualizar el estado con la comunidad encontrada
+				setComunity(matchingCommunity);
 			})
 			.catch((error) => {
 				console.log(error);
 			});
 	}, [comunity_id]);
-
-	useEffect(() => {
-		const arr = Array.isArray(comment_id) ? comment_id : [];
-		axios
-			.get(`http://localhost:3002/comment/?_id=${arr}`)
-			.then((response) => {
-				setComment(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [comment_id]);
 
 	return (
 		<div className="m-4">
