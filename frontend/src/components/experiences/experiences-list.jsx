@@ -71,11 +71,20 @@ const ExperienceList = ({ backgroundColor }) => {
 				{/* Genera una grilla de 1 o 2 columnas dependiendo del tamaño de la pantalla */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{/* Se genera un ItemList por cada item que se le pase */}
-					{Array.isArray(experience) && experience.map((item, index) => (
+					{experience.map((item, index) => (
 						<ExperiencePreview
 							key={index}
-							index={index}
-							experience={item}
+							name={item.name}
+							description={item.description}
+							comunity_id={comunity._id}
+							experience_id={item._id}
+							experience_image={item.experience_image}
+							anonimo={item.anonimo}
+							limit={item.limit}
+							reactions={item.reactions}
+							comments={item.comments_id}
+							user_id={userId}
+							audio={item.audio}
 						/>
 					))}
 				</div>
