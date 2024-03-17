@@ -7,40 +7,38 @@ const Comment = require("../collections/comment");
 
 const routerText = express.Router();
 
-routerText.get("/generate-audio/:id", async (req, res) => {
-	const { id } = req.params; // ID de la entidad
+routerText.get("/generate-audio/", async (req, res) => {
+	const id = req.query.id;
+	const type = req.query.type;
 
 	try {
-		// Determinar el texto a partir del tipo de entidad
-		let textToSpeech = "Texto por defecto";
-		let updatePromise;
+		let entity, textToSpeech;
 
-		if (req.query.type === "experience") {
-			const experience = await Experience.findById(id);
-			if (!experience) {
+		// Determinar el texto a partir del tipo de entidad y obtener la entidad
+		if (type === "experience") {
+			entity = await Experience.findById(id);
+			if (!entity) {
 				return res.status(404).json({ message: "Experiencia no encontrada" });
 			}
-			textToSpeech = experience.description || textToSpeech;
-			updatePromise = Experience.findByIdAndUpdate(
-				id,
-				{ $set: { audio: "" } },
-				{ new: true }
-			);
-		} else if (req.query.type === "comment") {
-			const comment = await Comment.findById(id);
-			if (!comment) {
+			textToSpeech = entity.description;
+		} else if (type === "comment") {
+			entity = await Comment.findById(id);
+			if (!entity) {
 				return res.status(404).json({ message: "Comentario no encontrado" });
 			}
-			textToSpeech = comment.message || textToSpeech;
-			updatePromise = Comment.findByIdAndUpdate(
-				id,
-				{ $set: { audio: "" } },
-				{ new: true }
-			);
+			textToSpeech = entity.message;
 		} else {
 			return res.status(400).json({ message: "Tipo de entidad no válida" });
 		}
 
+		// Verificar que se ha proporcionado texto
+		if (!textToSpeech) {
+			return res
+				.status(400)
+				.json({ message: "No hay texto para convertir en audio" });
+		}
+
+		// Ruta y nombre del archivo
 		const fileName = `audio-${Date.now()}.wav`;
 		const filePath = path.join(__dirname, "..", "public", "audio", fileName);
 
@@ -52,13 +50,17 @@ routerText.get("/generate-audio/:id", async (req, res) => {
 			}
 
 			// Actualizar la entidad con el nombre del archivo de audio
-			const updatedEntity = await updatePromise.set({ audio: fileName }).save();
+			const updateData = { audio: fileName };
+			const updatedEntity =
+				type === "experience"
+					? await Experience.findByIdAndUpdate(id, updateData, { new: true })
+					: await Comment.findByIdAndUpdate(id, updateData, { new: true });
 
 			// Devolver información relevante, incluido el nombre del archivo de audio
 			res.json({
 				message: "Audio generado y guardado con éxito",
 				fileName,
-				updatedEntity,
+				entity: updatedEntity,
 			});
 		});
 	} catch (error) {
