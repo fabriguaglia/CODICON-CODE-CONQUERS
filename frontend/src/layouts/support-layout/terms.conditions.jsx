@@ -9,6 +9,10 @@ const TermsConditions = ({ setOpen }) => {
 	return (
 		<div>
 			<button onClick={handleClose}>Terms & Conditions</button>
+
+			{/**Escribir para abajo */}
+
+
 		</div>
 	)
 }

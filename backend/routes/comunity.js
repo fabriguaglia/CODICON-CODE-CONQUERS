@@ -17,6 +17,10 @@ routerComunity.get("/", async (req, res) => {
 		};
 		const filter = {};
 
+		if (req.query.user_id) {
+			filter.user_id = new RegExp(req.query.user_id, "i");
+		}
+
 		if (req.query.name) {
 			filter.name = new RegExp(req.query.name, "i");
 		}

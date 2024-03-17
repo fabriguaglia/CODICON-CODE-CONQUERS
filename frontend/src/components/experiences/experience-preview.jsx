@@ -1,15 +1,61 @@
+import { useEffect, useState } from "react";
 import propTypes from "prop-types";
 import userDefault from "../../assets/user-default.png";
 import './experiences.css';
+import axios from "axios";
 
 const ExperiencePreview = ({
-	userName,
-	time,
-	comments,
-	text,
+	user_id,
+	comunity_id,
+	comment_id,
+	reactions,
+	name,
+	description,
+	experience_image,
+	audio,
+	limit,
+	anonimo,
 	hashtags,
 }) => {
 
+	const [user, setUser] = useState({});
+	const [comunity, setComunity] = useState({});
+	const [comment, setComment] = useState({});
+	const [reaction, setReaction] = useState({});
+
+	useEffect(() => {
+		axios
+			.get(`http://localhost:3002/user/?_id=${user_id}`)
+			.then((response) => {
+				setUser(response.data.docs[0]);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [user_id]);
+
+	useEffect(() => {
+		axios
+			.get(`http://localhost:3002/comunity/?_id=${comunity_id}`)
+			.then((response) => {
+				setComunity(response.data.docs[0]);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [comunity_id]);
+
+	useEffect(() => {
+		const arr = Array.isArray(comment_id) ? comment_id : [];
+		axios
+			.get(`http://localhost:3002/comment/?_id=${arr[0]}`)
+			.then((response) => {
+				setComment(response.data.docs[0]);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}, [comment_id]);
 
 	return (
 		<div className="m-4">
@@ -25,13 +71,13 @@ const ExperiencePreview = ({
 				<div className={`w-full col-4 px-2`}>
 					<div className="flex justify-between items-center">
 						<h3 className="col-span-2 text-md font-medium mr-4 text-white">
-							{userName}
+							{ }
 						</h3>
 						<p className="col-span-2 text-sm text-white">
-							{time.getMinutes() + " min"}
+							{ }
 						</p>
 					</div>
-					<p className="col-span-2 text-white">{text}</p>
+					<p className="col-span-2 text-white">{ }</p>
 					<button className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center ">
 						Seguir leyendo
 					</button>
@@ -45,8 +91,7 @@ const ExperiencePreview = ({
 				</div>
 			</div>
 			<div className={`w-full flex flex-row justify-between`}>
-				{comments && commentsImage()}
-				{tools()}
+
 			</div>
 		</div>
 	);
@@ -85,12 +130,17 @@ const tools = () => {
 };
 
 ExperiencePreview.propTypes = {
-	userName: propTypes.string,
-	time: propTypes.Date,
-	userImg: propTypes.string,
-	text: propTypes.string,
+	user_id: propTypes.string,
+	comunity_id: propTypes.string,
+	comment_id: propTypes.array,
+	reactions: propTypes.array,
+	name: propTypes.string,
+	description: propTypes.string,
+	experience_image: propTypes.string,
+	audio: propTypes.string,
+	limit: propTypes.number,
+	anonimo: propTypes.bool,
 	hashtags: propTypes.array,
-	comments: propTypes.bool,
 };
 
 export default ExperiencePreview;
