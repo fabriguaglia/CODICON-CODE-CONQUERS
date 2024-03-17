@@ -4,8 +4,9 @@ import Logo from "../../assets/principal-image.png";
 import "./header.css";
 import UserLogin from "../dialog/user-login";
 import UserRegister from "../dialog/user-register";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ green }) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	const [isLoginModal, setIsLoginModal] = useState(false);
@@ -29,6 +30,7 @@ const Header = () => {
 
 	// Detectar el scroll del usuario
 	useEffect(() => {
+		if (green) { setIsScrolled(true) }
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
 			if (scrollTop > 0) {
@@ -68,14 +70,15 @@ const Header = () => {
 			className={`fixed w-full top-0 z-50 flex items-center justify-between px-4 py-2 ${isScrolled ? "bg-primary-color" : "bg-transparent"
 				}`}
 		>
-			<div className={styles.div}>
+			<Link className={styles.div} to="/">
 				<img src={Logo} alt="Logo" className="h-8 mr-2 cursor-pointer" />
-			</div>
+			</Link>
 			<div className={styles.div}>
 				<button className={styles.links} onClick={openLoginModal}>
 					Iniciar sesión
 				</button>
 				<button className={styles.links} onClick={openRegisterModal}>Registrarse</button>
+
 				{links.map((link) => (
 					<Link
 						key={link.id}
@@ -85,6 +88,10 @@ const Header = () => {
 						{link.name}
 					</Link>
 				))}
+
+				<Link className={styles.links} to="/about">Quiénes somos</Link>
+				<button className={styles.links}>Soporte</button>
+
 			</div>
 			<UserRegister isOpen={isRegisterModal} onClose={closeRegisterModal} />
 			<UserLogin isOpen={isLoginModal} onClose={closeLoginModal} />
