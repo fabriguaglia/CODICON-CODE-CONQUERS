@@ -1,10 +1,8 @@
 # Programa "Transmivencia"
 
-<img src="./frontend/src/assets/principal-image.png" alt="Imagen principal" width="300">
-
-## Descripción
-
 El programa "Transmivencia" es una iniciativa innovadora diseñada para promover la inclusión y la diversidad a través de una plataforma digital interactiva. Con el objetivo de crear un espacio seguro y accesible para personas de todos los orígenes y capacidades, "Transmivencia" se centra en la transmisión de experiencias en formatos multimedia, permitiendo que todos los usuarios puedan compartir sus historias de manera auténtica y significativa.
+
+<img src="./frontend/src/assets/principal-image.png" alt="Imagen principal" width="300">
 
 ## Características Principales
 
