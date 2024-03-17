@@ -1,15 +1,22 @@
 import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../services/authcontext";
 import Image from "../../assets/principal-image.png";
-import Header from "../../components/header/header";
+import Header from "../header/header";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const CreateCommunity = () => {
+const CreateExperience = () => {
+
+	const url = "http://localhost:3002/comunity";
 	const [user, setUser] = useState([]);
-	const [community, setCommunity] = useState({
+	const [comunity, setComunity] = useState([]);
+	const [params, setParams] = useState({
+		name: '',
+	});
+
+	const [experience, setExperience] = useState({
 		user_id: "",
-		name: "",
+		community_name: "",
 		description: "",
 		comunity_image: null,
 		limit: 0,
@@ -20,18 +27,34 @@ const CreateCommunity = () => {
 
 	const handleChange = (e) => {
 		if (e.target.name === 'comunity_image' && e.target.files) {
-			setCommunity({
-				...community,
+			setExperience({
+				...experience,
 				[e.target.name]: e.target.files[0] // Asume que es un solo archivo
 			});
 		} else {
-			setCommunity({
-				...community,
+			setExperience({
+				...experience,
 				[e.target.name]: e.target.value,
 			});
 		}
 	};
 
+	useEffect(() => {
+		try {
+			axios.get(url, {
+				params: {
+					name: params.name
+				}
+			}).then((response) => {
+				setComunity(response.data.docs);
+				console.log(response.data.docs);
+			}).catch((error) => {
+				console.log(error);
+			})
+		} catch (error) {
+			console.log(error);
+		}
+	}, [params]);
 
 	useEffect(() => {
 		axios
@@ -49,12 +72,12 @@ const CreateCommunity = () => {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("comunity_image", community.comunity_image);
+		formData.append("community_name", experience.comunity_image);
 		formData.append("user_id", userId);
-		formData.append("name", community.name);
-		formData.append("description", community.description);
-		formData.append("limit", community.limit);
-		formData.append("state", community.state);
+		formData.append("name", experience.name);
+		formData.append("description", experience.description);
+		formData.append("limit", experience.limit);
+		formData.append("state", experience.state);
 
 		axios.post("http://localhost:3002/comunity/", formData, {
 			headers: {
@@ -98,7 +121,7 @@ const CreateCommunity = () => {
 					</div>
 					<form className="space-y-6 w-8/12" onSubmit={handleSubmit} >
 						<h1 className="text-5xl text-white mb-8 text-center">
-							Crea tu comunidad
+							Transmite tu experiencia
 						</h1>
 						<div className="flex flex-col justify-center w-full">
 							<div className="mt-2">
@@ -116,20 +139,17 @@ const CreateCommunity = () => {
 									))}
 								</select>
 							</div>
+							
 							<div className="mt-2">
 								<label
-									htmlFor="communityName"
+									htmlFor="experienceName"
 									className="block text-sm font-medium text-gray-700"
 								>
 									Nombre de la comunidad
 								</label>
-								<input
-									id="communityName"
-									name="name"
-									type="text"
-									placeholder="Nombre de la comunidad"
-									required
-									className="block w-full rounded-lg py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								<SelectorComponent
+									options={comunity.map((comunity) => ({ label: comunity.name, value: comunity.name }))}
+									selectedOption={experience.community_name}
 									onChange={handleChange}
 								/>
 							</div>
@@ -138,11 +158,12 @@ const CreateCommunity = () => {
 									htmlFor="description"
 									className="block text-sm font-medium text-gray-700"
 								>
-									Descripcion:
+									Tu experiencia:
 								</label>
 								<textarea
 									type="text"
 									id="description"
+									placeholder="Comparte tu experiencia..."
 									name="description"
 									className="block w-full rounded-lg py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									onChange={handleChange}
@@ -153,7 +174,7 @@ const CreateCommunity = () => {
 									htmlFor="comunity_image"
 									className="block text-sm font-medium text-gray-700"
 								>
-									Seleccionar imagen:
+									Comparte una foto:
 								</label>
 								<input
 									type="file"
@@ -164,35 +185,7 @@ const CreateCommunity = () => {
 								/>
 							</div>
 						</div>
-						<div className="mt-2">
-							<label
-								htmlFor="limit"
-								className="block text-sm font-medium text-gray-700"
-							>
-								Edad minima:
-							</label>
-							<input
-								type="number"
-								id="limit"
-								name="limit"
-								placeholder="Edad Minima"
-								required
-								className="block w-full py-2 px-3 rounded-lg border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-								onChange={handleChange}
-							/>
-						</div>
-						<div className="mt-2">
-							<label
-								htmlFor="limit"
-								className="block text-sm font-medium text-gray-700"
-							>
-								Publico o Privado:
-							</label>
-							<select name="state" id="">
-								<option value="true">Privado</option>
-								<option value="false">Publico</option>
-							</select>
-						</div>
+					
 						<div>
 							<button
 								type="submit"
@@ -216,4 +209,20 @@ const CreateCommunity = () => {
 	);
 };
 
-export default CreateCommunity;
+const SelectorComponent = ({ options, selectedOption, onChange }) => {
+	return (
+	  <select
+		value={selectedOption}
+		onChange={(e) => onChange(e.target.value)}
+		className="block w-full rounded-lg py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+	  >
+		{options.map((option, index) => (
+		  <option key={index} value={option.value}>
+			{option.label}
+		  </option>
+		))}
+	  </select>
+	);
+  };
+
+export default CreateExperience;

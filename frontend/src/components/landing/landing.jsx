@@ -20,7 +20,7 @@ const Landing = ({ userLogged }) => {
 					<p className="text-xl mb-6">Transmite tu experiencia</p>
 
 					<button className="text-2xl bg-primary-color text-white py-6 px-20 rounded-full mb-4 hover:bg-opacity-80 transition duration-300">
-						{userLogged ? <Link to="/create-community">Cuentanos tu historia</Link> : "Crea tu comunidad"}
+						{userLogged ? <Link to="/create-experience">Cuentanos tu historia</Link> : "Crea tu comunidad"}
 					</button>
 
 					<a href="#" className="text-lg flex flex-col items-center">

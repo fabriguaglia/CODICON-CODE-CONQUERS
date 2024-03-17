@@ -11,7 +11,7 @@ const ProtectedRouter = () => {
 	useEffect(() => {
 		const path = location.pathname;
 		const isPublicRoute = ["/", "/about", "/support"].includes(path);
-		const isProtectedRoute = ["/create-community", "/community", "/experience", "/event", "/message"].includes(path);
+		const isProtectedRoute = ["/create-community", "/community", "/create-experience", "/experience", "/message", "/user-feed"].includes(path);
 
 		if (token && userId && isPublicRoute) {
 			// Usuario autenticado en ruta pública, redirigir a ruta protegida (ej: "/community")
