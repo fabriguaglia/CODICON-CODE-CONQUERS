@@ -3,6 +3,7 @@ import propTypes from "prop-types";
 import userDefault from "../../assets/user-default.png";
 import './experiences.css';
 import axios from "axios";
+import AudioPlay from "../../services/audio.play";
 
 const ExperiencePreview = ({
 	user_id,
@@ -68,7 +69,7 @@ const ExperiencePreview = ({
 			<div className={`w-fit flex flex-row mb-4`}>
 				<div className={`col-2 relative`}>
 					<img
-						src={"http://localhost:3002/images/" + experience_image}
+						src={"http://localhost:3002/" + experience_image}
 						alt="Imagen"
 						className="w-16 h-16 rounded-full object-cover"
 					/>
@@ -87,6 +88,7 @@ const ExperiencePreview = ({
 								<p className="text-white">Comentarios: {comment_id.length}</p>
 								<p className="text-white">Reacciones: {reactions.length}</p>
 								<p className="text-white">Hashtags: {hashtags.length}</p>
+								<AudioPlay audioUrl={`http://localhost:3002/audio/${audio}`} />
 							</>
 						}
 					</div>
