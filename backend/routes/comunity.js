@@ -36,21 +36,16 @@ routerComunity.get("/", async (req, res) => {
 
 routerComunity.post("/", upload.single("image_url"), async (req, res) => {
 	try {
-		if (!req.file) {
-			const comunity = new Community(req.body);
-			await comunity.save();
-			res.status(201).json(comunity);
-		} else {
-			const comunity = new Community({
-				user_id: req.body.user_id,
-				name: req.body.name,
-				image_url: req.file.path,
-				description: req.body.description,
-				limit: req.body.limit,
-			});
-			await comunity.save();
-			res.status(201).json(comunity);
-		}
+		const comunity = new Community({
+			user_id: req.body.user_id,
+			name: req.body.name,
+			image_url: req.file.filename,
+			description: req.body.description,
+			limit: req.body.limit,
+			state: req.body.state,
+		});
+		await comunity.save();
+		res.status(201).json(comunity);
 	} catch (error) {
 		res.status(500).json(error);
 	}

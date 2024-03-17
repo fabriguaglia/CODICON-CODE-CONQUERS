@@ -14,17 +14,22 @@ routerUser.get("/", async (req, res) => {
 		const options = {
 			page: parseInt(req.query.page) || 1,
 			limit: parseInt(req.query.limit) || 10,
-			sort: { name: 1 },
-			populate: "comunity_id",
 		};
 		const filter = {};
+
+		if (req.query._id) {
+			filter._id = req.query._id;
+		}
+		if (req.query.comunity_id) {
+			filter.comunity_id = req.query.comunity_id;
+		}
 
 		if (req.query.email) {
 			filter.email = new RegExp(req.query.email, "i");
 		}
 
-		if (req.query.name) {
-			filter.name = new RegExp(req.query.name, "i");
+		if (req.query.username) {
+			filter.username = new RegExp(req.query.username, "i");
 		}
 
 		const users = await User.paginate(filter, options);
