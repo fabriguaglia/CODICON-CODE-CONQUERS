@@ -3,10 +3,12 @@ import propTypes from "prop-types";
 const CommmunityView = ({ index, community, goBack }) => {
 	return (
 		<div className="container relative mx-auto px-4 py-8">
-			<button onClick={()=>goBack()}
-            className="back-button absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 h-8 w-8 bg-secondary-color rounded-r-full flex items-center justify-center">
+			<button
+				onClick={() => goBack()}
+				className="back-button absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 h-12 w-12 bg-primary-color rounded-r-full flex items-center justify-center"
+			>
 				<svg
-					className="h-4 w-4 text-white"
+					className="h-6 w-6 text-white"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
@@ -22,17 +24,20 @@ const CommmunityView = ({ index, community, goBack }) => {
 				<div className="w-full md:w-1/2 md:pr-4 mb-4 md:mb-0">
 					<h2 className="text-3xl font-bold mb-2">{community.name}</h2>
 					<p className="mb-4">{community.description}</p>
-					<div className="flex flex-wrap">
-						<div>Creado por {community.user_id}</div>
+					<div className="flex flex-row justify-between items-center">
 						<div>Edad recomendada {community.limit} </div>
+						<button className="bg-secondary-color text-md font-medium text-white px-8 rounded-full hover:bg-opacity-80 transition duration-300 uppercase">
+							+ Seguir
+						</button>
 					</div>
+                    <div>Reacciones {community.reactions} </div>
 				</div>
 				{/* Columna 2 */}
-				<div className="w-full md:w-1/2">
+				<div className="w-1/3">
 					<img
 						src={"http://localhost:3002/images/" + community.comunity_image}
 						alt="Imagen"
-						className="w-full h-auto rounded-md"
+						className="w-max h-auto rounded-md"
 					/>
 				</div>
 			</div>
