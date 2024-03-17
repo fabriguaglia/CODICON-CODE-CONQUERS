@@ -25,7 +25,6 @@ const Landing = ({ userLogged }) => {
 
 					<a href="#" className="text-lg flex flex-col items-center">
 						{userLogged ? "o descubre una" : "o unete a una"}
-
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="80"
