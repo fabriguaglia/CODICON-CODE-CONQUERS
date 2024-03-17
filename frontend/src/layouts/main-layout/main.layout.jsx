@@ -1,7 +1,7 @@
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import Landing from '../../components/landing/landing';
-import CommunityList from '../../components/community-list/community-list';
+import CommunityList from '../../components/community/community-list';
 import './main.layout.css';
 
 const MainLayout = () => {

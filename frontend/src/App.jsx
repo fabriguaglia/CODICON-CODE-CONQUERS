@@ -4,11 +4,10 @@ import './App.css'
 import UserLayout from './layouts/user-layout/user-layout.jsx'
 import AboutLayout from './layouts/about-layout/about.layout.jsx'
 import ProtectedRouter from './services/protected.router.jsx'
-
 import SupportLayout from './layouts/support-layout/support.layout.jsx'
-
-import CreateCommunity from './layouts/user-layout/create-community.jsx'
-
+import CreateCommunity from './components/community/create-community.jsx'
+import CreateExperience from './components/experiences/create-experience.jsx'
+import MainLayout from './layouts/main-layout/main.layout.jsx'
 
 function App() {
 
@@ -16,13 +15,14 @@ function App() {
 		<HashRouter>
 			<AuthContextProvider>
 				<Routes>
-					<Route path="/" element={<UserLayout />} />
+					<Route path="/" element={<MainLayout />} />
 					<Route path="/about" element={<AboutLayout />} />
 					<Route path="/support" element={<SupportLayout />} />
 					<Route element={<ProtectedRouter />} >
 
 						<Route path="/create-community" element={<CreateCommunity />} />
-
+						<Route path="/create-experience" element={<CreateExperience />} />
+						<Route path="/user-feed" element={<UserLayout />} />
 					</Route>
 				</Routes>
 			</AuthContextProvider>

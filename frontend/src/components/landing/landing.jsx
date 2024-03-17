@@ -20,7 +20,7 @@ const Landing = ({ userLogged }) => {
 					<p className="text-xl mb-6">Transmite tu experiencia</p>
 
 					<button className="text-2xl bg-primary-color text-white py-6 px-20 rounded-full mb-4 hover:bg-opacity-80 transition duration-300">
-						{userLogged ? <Link to="/create-community">Cuentanos tu historia</Link> : "Crea tu comunidad"}
+						{userLogged ? <Link to="/create-experience">Cuentanos tu historia</Link> : "Crea tu comunidad"}
 					</button>
 
 					<a href="#" className="text-lg flex flex-col items-center">
@@ -35,17 +35,17 @@ const Landing = ({ userLogged }) => {
 							<path
 								d="M101.833 58.6666L64.5 90.6666L27.1667 58.6666"
 								stroke="#76007A"
-								stroke-width="8"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="8"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								opacity="0.5"
 								d="M101.833 37.3333L64.5 69.3333L27.1667 37.3333"
 								stroke="#76007A"
-								stroke-width="8"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="8"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 					</a>

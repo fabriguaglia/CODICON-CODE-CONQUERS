@@ -1,6 +1,7 @@
 const Experience = require("../collections/experience");
 const express = require("express");
 const routerExperience = express.Router();
+const upload = require("../middleware/upload");
 
 /**
  * Get all experiences
@@ -33,35 +34,63 @@ routerExperience.get("/", async (req, res) => {
  * @route POST /experience
  */
 
-routerExperience.post("/", async (req, res) => {
-	try {
-		const experience = new Experience(req.body);
-		await experience.save();
-		res.status(201).json(experience);
-	} catch (error) {
-		res.status(500).json(error);
+routerExperience.post(
+	"/",
+	upload.single("experience_image"),
+	async (req, res) => {
+		try {
+			const experience = new Experience({
+				user_id: req.body.user_id,
+				comunity_id: req.body.comunity_id,
+				comment_id: req.body.comment_id,
+				name: req.body.name,
+				description: req.body.description,
+				experience_image: req.file.filename,
+				audio: req.body.audio,
+				limit: req.body.limit,
+				anonimo: req.body.anonimo,
+			});
+			await experience.save();
+			res.status(201).json(experience);
+		} catch (error) {
+			res.status(500).json(error);
+		}
 	}
-});
+);
 
 /**
  * Update a experience
  * @route PATCH /experience/:id
  */
 
-routerExperience.patch("/:id", async (req, res) => {
-	try {
-		const experience = await Experience.findByIdAndUpdate(
-			req.params.id,
-			req.body,
-			{
-				new: true,
-			}
-		);
-		res.status(200).json(experience);
-	} catch (error) {
-		res.status(500).json(error);
+routerExperience.patch(
+	"/:id",
+	upload.single("experience_image"),
+	async (req, res) => {
+		try {
+			const experience = await Experience.findByIdAndUpdate(
+				req.params.id,
+				{
+					user_id: req.body.user_id,
+					comunity_id: req.body.comunity_id,
+					comment_id: req.body.comment_id,
+					name: req.body.name,
+					description: req.body.description,
+					experience_image: req.file.filename,
+					audio: req.body.audio,
+					limit: req.body.limit,
+					anonimo: req.body.anonimo,
+				},
+				{
+					new: true,
+				}
+			);
+			res.status(200).json(experience);
+		} catch (error) {
+			res.status(500).json(error);
+		}
 	}
-});
+);
 
 /**
  * Delete a experience

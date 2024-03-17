@@ -7,7 +7,7 @@ const paginate = require("mongoose-paginate-v2");
  * @property {string} user_id
  * @property {string} name
  * @property {string} description
- * @property {string} image_url
+ * @property {string} comunity_image
  * @property {number} limit
  * @property {boolean} state
  * @property {Reaction[]} reactions
@@ -30,9 +30,8 @@ const comunitySchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	image_url: {
+	comunity_image: {
 		type: String,
-		default: "/images/logo.webp",
 	},
 	limit: {
 		type: Number,
