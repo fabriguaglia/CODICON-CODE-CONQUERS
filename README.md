@@ -33,4 +33,5 @@ El programa "Transmivencia" está abierto a la contribución y colaboración de 
 
 ## Licencia
 
-El programa "Transmivencia" se distribuye bajo la Licencia [MIT](https://opensource.org/licenses/MIT), lo que permite su uso, modificación y distribución con fines comerciales y no comerciales.
+El programa "Transmivencia" se distribuye bajo la Licencia [CC BY-NC-ND 4.0 DEED
+Attribution-NonCommercial-NoDerivs 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/), lo que permite su libre distribución y uso no comercial, pero prohíbe la modificación del trabajo original y su uso con fines comerciales.
