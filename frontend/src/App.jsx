@@ -8,7 +8,6 @@ import ProtectedRouter from './services/protected.router.jsx'
 import SupportLayout from './layouts/support-layout/support.layout.jsx'
 
 import CreateCommunity from './layouts/user-layout/create-community.jsx'
-import PrivacyPolicy from './components/privacy-policy/PrivacyPolicy.jsx'
 
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
 					<Route path="/" element={<UserLayout />} />
 					<Route path="/about" element={<AboutLayout />} />
 					<Route path="/support" element={<SupportLayout />} />
-					<Route path="/privacy-policy" element={<PrivacyPolicy />} />
 					<Route element={<ProtectedRouter />} >
 
 						<Route path="/create-community" element={<CreateCommunity />} />
