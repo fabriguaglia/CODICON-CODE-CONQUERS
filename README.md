@@ -1,6 +1,6 @@
 # Programa "Transmivencia"
 
-![Imagen principal](./frontend/src/assets/principal-image.png)
+<img src="./frontend/src/assets/principal-image.png" alt="Imagen principal" width="300">
 
 ## Descripción
 
