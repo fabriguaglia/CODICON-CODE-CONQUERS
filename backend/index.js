@@ -38,7 +38,7 @@ mongoose
 		console.log(err);
 	});
 
-app.use(express.static("/public"));
+app.use(express.static("public"));
 app.use(express.json());
 
 /**
