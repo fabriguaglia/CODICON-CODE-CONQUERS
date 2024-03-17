@@ -56,6 +56,7 @@ app.use("/event", require("./routes/event"));
 app.use("/invitation", require("./routes/invitation"));
 app.use("/reaction", require("./routes/reaction"));
 app.use("/hashtag", require("./routes/hashtag"));
+app.use("/text", require("./routes/text"));
 
 /**
  * iniciando el servidor

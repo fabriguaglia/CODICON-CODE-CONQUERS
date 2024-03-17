@@ -39,23 +39,29 @@ routerExperience.post(
 	upload.single("experience_image"),
 	async (req, res) => {
 		try {
-			const experience = new Experience({
+			// Crear un objeto con los datos recibidos. No incluir propiedades como `comment_id`, `reactions`, `hashtags` si no se van a añadir de inmediato.
+			const newExperienceData = {
 				user_id: req.body.user_id,
 				comunity_id: req.body.comunity_id,
-				comment_id: req.body.comment_id,
-				reacions: req.body.reacions,
-				hashtags: req.body.hashtags,
+				// Estas propiedades se inicializan como arreglos vacíos o según sea necesario
+				comment_id: [],
+				reactions: [],
+				hashtags: [],
 				name: req.body.name,
 				description: req.body.description,
-				experience_image: req.file.filename,
-				audio: req.body.audio,
+				experience_image: req.file ? req.file.filename : "",
+				audio: "", // Suponiendo que el audio se generará después
 				limit: req.body.limit,
 				anonimo: req.body.anonimo,
-			});
-			await experience.save();
-			res.status(201).json(experience);
+			};
+
+			const newExperience = new Experience(newExperienceData);
+			await newExperience.save();
+
+			res.status(201).json(newExperience);
 		} catch (error) {
-			res.status(500).json(error);
+			console.error("Error al crear la experiencia:", error);
+			res.status(500).json({ message: "Error al crear la experiencia" });
 		}
 	}
 );

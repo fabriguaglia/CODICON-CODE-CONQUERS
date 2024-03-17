@@ -7,21 +7,17 @@ import Swal from "sweetalert2";
 
 const CreateExperience = () => {
 
-	const url = "http://localhost:3002/comunity";
 	const [user, setUser] = useState([]);
 	const [comunity, setComunity] = useState([]);
-	const [params, setParams] = useState({
-		name: '',
-	});
 
 	const [experience, setExperience] = useState({
 		user_id: "",
-		community_name: "",
+		comunity_id: "",
+		name: "",
 		description: "",
-		comunity_image: null,
+		experience_image: null,
 		limit: 0,
-		state: false,
-		reactions: [],
+		anonimo: false,
 	});
 	const { userId } = useContext(AuthContext);
 
@@ -41,20 +37,20 @@ const CreateExperience = () => {
 
 	useEffect(() => {
 		try {
-			axios.get(url, {
+			axios.get("http://localhost:3002/comunity/", {
 				params: {
-					name: params.name
+					_id: { $in: user.map((user) => user.comunity_id) }
 				}
 			}).then((response) => {
 				setComunity(response.data.docs);
-				console.log(response.data.docs);
+				console.log(response.data.docs[0]);
 			}).catch((error) => {
 				console.log(error);
 			})
 		} catch (error) {
 			console.log(error);
 		}
-	}, [params]);
+	}, [user]);
 
 	useEffect(() => {
 		axios
@@ -72,14 +68,16 @@ const CreateExperience = () => {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("community_name", experience.comunity_image);
+		formData.append("comunity_image", experience.experience_image);
 		formData.append("user_id", userId);
+		formData.append("comunity_id", comunity.map((comunity) => comunity._id));
 		formData.append("name", experience.name);
 		formData.append("description", experience.description);
 		formData.append("limit", experience.limit);
-		formData.append("state", experience.state);
+		formData.append("anonimo", experience.anonimo);
 
-		axios.post("http://localhost:3002/comunity/", formData, {
+		// Llamar al endpoint para crear la experiencia
+		axios.post("http://localhost:3002/experience", formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}
@@ -131,7 +129,7 @@ const CreateExperience = () => {
 								>
 									Usueario
 								</label>
-								<select className={styles.input} name="user_id" id=" user_id">
+								<select className={styles.input} name="user_id" id=" user_id" onChange={handleChange} value={experience.user_id}>
 									{user.map((user) => (
 										<option key={user._id} value={userId}>
 											{userId === user._id ? user.username : null}
@@ -139,17 +137,37 @@ const CreateExperience = () => {
 									))}
 								</select>
 							</div>
-							
+
 							<div className="mt-2">
 								<label
-									htmlFor="experienceName"
+									htmlFor="comunity_id"
 									className="block text-sm font-medium text-gray-700"
 								>
 									Nombre de la comunidad
 								</label>
-								<SelectorComponent
-									options={comunity.map((comunity) => ({ label: comunity.name, value: comunity.name }))}
-									selectedOption={experience.community_name}
+								<select
+									className={styles.input}
+									name="comunity_id"
+									id="comunity_id"
+									onChange={handleChange}
+									value={experience.comunity_id}
+								>
+									{comunity.map((comunity) => (
+										<option key={comunity._id} value={comunity._id}>
+											{comunity.name}
+										</option>
+									))}
+								</select>
+							</div>
+							<div className="mt-2">
+								<label htmlFor="name" className="block text-sm font-medium text-gray-700">
+									Nombre de la experiencia
+								</label>
+								<input
+									type="text"
+									id="name"
+									name="name"
+									className={styles.input}
 									onChange={handleChange}
 								/>
 							</div>
@@ -171,7 +189,7 @@ const CreateExperience = () => {
 							</div>
 							<div className="mt-4">
 								<label
-									htmlFor="comunity_image"
+									htmlFor="experience_image"
 									className="block text-sm font-medium text-gray-700"
 								>
 									Comparte una foto:
@@ -179,13 +197,36 @@ const CreateExperience = () => {
 								<input
 									type="file"
 									id="comunity_image"
-									name="comunity_image"
+									name="experience_image"
 									className="block w-full py-2 px-3 rounded-lg border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 									onChange={handleChange}
 								/>
 							</div>
+							<div className="mt-4">
+								<label
+									htmlFor="anonimo"
+									className="block text-sm font-medium text-gray-700"
+								>
+									Como quieres compartir la experiencia?
+								</label>
+								<select name="anonimo" id="" value={experience.anonimo} onChange={handleChange} className={styles.input}>
+									<option value={true}>Anonimo</option>
+									<option value={false}>Publico</option>
+								</select>
+							</div>
+							<div className="mt-4">
+								<label htmlFor="limit" className="block text-sm font-medium text-gray-700"> Limite de edad:</label>
+								<input
+									type="number"
+									id="limit"
+									name="limit"
+									value={experience.limit}
+									onChange={handleChange}
+									className={styles.input}
+								/>
+							</div>
 						</div>
-					
+
 						<div>
 							<button
 								type="submit"
@@ -208,21 +249,5 @@ const CreateExperience = () => {
 		</div>
 	);
 };
-
-const SelectorComponent = ({ options, selectedOption, onChange }) => {
-	return (
-	  <select
-		value={selectedOption}
-		onChange={(e) => onChange(e.target.value)}
-		className="block w-full rounded-lg py-1.5 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-	  >
-		{options.map((option, index) => (
-		  <option key={index} value={option.value}>
-			{option.label}
-		  </option>
-		))}
-	  </select>
-	);
-  };
 
 export default CreateExperience;

@@ -4,8 +4,6 @@ import ExperiencePreview from "./experience-preview";
 //import Image from "../../assets/principal-image.png";
 import propTypes from "prop-types";
 
-import "../community-list/community-list.css";
-
 import "../community/community-list.css";
 
 import AuthContext from "../../services/authcontext";
