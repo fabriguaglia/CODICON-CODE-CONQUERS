@@ -1,68 +1,16 @@
 import { useEffect, useState } from "react";
 import propTypes from "prop-types";
 import userDefault from "../../assets/user-default.png";
-import './experiences.css';
+import "./experiences.css";
 import axios from "axios";
 
-const ExperiencePreview = ({
-	user_id,
-	comunity_id,
-	comment_id = [],
-	reactions = [],
-	name,
-	description,
-	experience_image,
-	audio,
-	limit,
-	anonimo,
-	hashtags = [],
-}) => {
-
-	const [user, setUser] = useState({});
-	const [comunity, setComunity] = useState({});
-	const [comment, setComment] = useState({});
-	const [reaction, setReaction] = useState({});
-	const [leyendo, setLeyendo] = useState(false);
-
-	const handleChange = (e) => {
-		e.preventDefault();
-		setLeyendo(!leyendo);
+const ExperiencePreview = ({ index, experience, comunity }) => {
+	const handleTexttoSpeech = () => {
+		const textToSpeech = experience.name + " " + experience.description;
+		// Use textToSpeech variable to implement text-to-speech functionality
+		// ...
+		console.log(textToSpeech);
 	}
-
-	useEffect(() => {
-		axios
-			.get(`http://localhost:3002/user/?_id=${user_id}`)
-			.then((response) => {
-				setUser(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [user_id]);
-
-	useEffect(() => {
-		axios
-			.get(`http://localhost:3002/comunity/?_id=${comunity_id}`)
-			.then((response) => {
-				setComunity(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [comunity_id]);
-
-	useEffect(() => {
-		const arr = Array.isArray(comment_id) ? comment_id : [];
-		axios
-			.get(`http://localhost:3002/comment/?_id=${arr}`)
-			.then((response) => {
-				setComment(response.data.docs[0]);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, [comment_id]);
-
 	return (
 		<div className="m-4">
 			<div className={`w-fit flex flex-row mb-4`}>
@@ -72,35 +20,46 @@ const ExperiencePreview = ({
 						alt="Imagen"
 						className="w-16 h-16 rounded-full object-cover"
 					/>
-					<div className="line"> {experience_image}</div>
+					<div className="line"></div>
 				</div>
 				<div className={`w-full col-4 px-2`}>
-					<div className="flex flex-col justify-between items-center">
-						<h3 className=" text-lg font-medium mr-4 text-white">
-							{name}
+					<div className="flex justify-between items-center">
+						<h3 className="col-span-2 text-md font-medium mr-4 text-white">
+							{experience.name}
 						</h3>
-						<p className="text-white">Creado por: {anonimo ? "Anónimo" : user.name}</p>
-						<p className=" text-sm text-white">Comunidad: {comunity.name}</p>
-						<p className="text-white">Edad mínima para ver: {limit}</p>
-						{leyendo &&
-							<>
-								<p className="text-white">{description}</p>
-								<p className="text-white">Comentarios: {comment_id.length}</p>
-								<p className="text-white">Reacciones: {reactions.length}</p>
-								<p className="text-white">Hashtags: {hashtags.length}</p>
-							</>
-						}
+						<p className="col-span-2 text-sm text-white">32 min</p>
 					</div>
-					<button onClick={handleChange} className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center">
-						{leyendo ? "Ocultar detalles" : "Seguir leyendo"}
+					<p className="col-span-2 max-h-24 overflow-hidden text-ellipsis text-white">
+						{experience.description}
+					</p>
+					<button className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center ">
+						Seguir leyendo
 					</button>
-					<div className="flex justify-start mr-4 items-center">
+					<div className="flex justify-start mr-4 items-center overflow-hidden text-ellipsis">
+						{experience.hashtags.map((hashtag, index) => (
+							<span key={index} className="text-white font-bold">
+								{hashtag}
+							</span>
+						))}
 					</div>
 				</div>
 			</div>
 			<div className={`w-full flex flex-row justify-between`}>
 				{commentsImage()}
-				{tools()}
+				<div className={`w-fit flex flex-row gap-4`}>
+					<span className="material-symbols-outlined text-white">favorite</span>
+					<span className="material-symbols-outlined text-white">
+						chat_bubble
+					</span>
+					<span
+						className="material-symbols-outlined text-white"
+						onClick={() => {
+							handleTexttoSpeech();
+						}}
+					>
+						volume_up
+					</span>
+				</div>
 			</div>
 		</div>
 	);
