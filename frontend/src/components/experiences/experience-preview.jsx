@@ -9,6 +9,8 @@ const ExperiencePreview = ({
 	text,
 	hashtags,
 }) => {
+
+
 	return (
 		<div className="m-4">
 			<div className={`w-fit flex flex-row mb-4`}>

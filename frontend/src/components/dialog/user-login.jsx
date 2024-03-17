@@ -41,7 +41,7 @@ const UserLogin = ({ isOpen, onClose }) => {
 					const user_id = response.data.user_id;
 					setToken(token);
 					setUserId(user_id);
-					navigate("/");
+					navigate("/user-feed");
 				})
 				.catch((error) => {
 					Swal.fire({
