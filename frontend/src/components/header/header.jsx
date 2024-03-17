@@ -5,7 +5,7 @@ import UserLogin from "../dialog/user-login";
 import UserRegister from "../dialog/user-register";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({green}) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	const [isLoginModal, setIsLoginModal] = useState(false);
@@ -29,6 +29,7 @@ const Header = () => {
 
 	// Detectar el scroll del usuario
 	useEffect(() => {
+		if(green){setIsScrolled(true)}
 		const handleScroll = () => {
 			const scrollTop = window.scrollY;
 			if (scrollTop > 0) {

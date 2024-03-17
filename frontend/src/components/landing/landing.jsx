@@ -1,7 +1,9 @@
 import BackgroundImage from "../../assets/bg-image.png";
 import Image from "../../assets/principal-image.png";
+import { Link } from "react-router-dom";
 
 const Landing = ({ userLogged }) => {
+
 	return (
 		<div className="relative h-screen">
 			{/* Fondo de pantalla completa */}
@@ -16,13 +18,14 @@ const Landing = ({ userLogged }) => {
 				<div className="flex flex-col items-center justify-center text-gray px-8">
 					<h1 className="text-6xl mb-4">Transmivencia</h1>
 					<p className="text-xl mb-6">Transmite tu experiencia</p>
+
 					<button className="text-2xl bg-primary-color text-white py-6 px-20 rounded-full mb-4 hover:bg-opacity-80 transition duration-300">
-						
-						{userLogged ? "Cuentanos tu historia" : "Crea tu comunidad"}
+						{userLogged ? <Link to="/create-community">Cuentanos tu historia</Link> : "Crea tu comunidad"}
 					</button>
+
 					<a href="#" className="text-lg flex flex-col items-center">
 						{userLogged ? "o descubre una" : "o unete a una"}
-							
+
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="80"

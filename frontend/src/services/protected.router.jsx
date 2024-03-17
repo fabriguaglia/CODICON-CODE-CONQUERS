@@ -6,7 +6,7 @@ const ProtectedRouter = ({ children }) => {
 	const { token } = useContext(AuthContext);
 
 	const linksProtected = [
-		"/profile",
+		"/create-community",
 		"/comunity",
 		"/experience",
 		"/event",
