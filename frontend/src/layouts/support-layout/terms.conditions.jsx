@@ -8,7 +8,7 @@ const TermsConditions = ({ setOpen }) => {
 
 	return (
 		<div>
-			<button onClick={handleClose}>Terms & Conditions</button>
+			<button onClick={handleClose}>
 			<div className="text-white"> 
           <p className="text-xl font-bold">
             Por favor, lee atentamente los siguientes términos y condiciones antes de utilizar los servicios proporcionados por Transmivencia. Al acceder y utilizar nuestra plataforma, aceptas cumplir con estos términos y condiciones en su totalidad. Si no estás de acuerdo con alguno de estos términos, te solicitamos que no utilices nuestros servicios.
@@ -95,7 +95,8 @@ const TermsConditions = ({ setOpen }) => {
 						Al utilizar nuestros servicios, aceptas cumplir con estos términos y condiciones. Gracias por ser parte de nuestra comunidad y contribuir a crear un entorno inclusivo y respetuoso para todos.            </span>
           </p>
         </div>
-		</div>
+		</button>
+    </div>
 	)
 }
 
