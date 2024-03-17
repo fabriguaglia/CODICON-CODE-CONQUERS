@@ -34,12 +34,12 @@ routerComunity.get("/", async (req, res) => {
  * @route POST /comunity
  * */
 
-routerComunity.post("/", upload.single("image_url"), async (req, res) => {
+routerComunity.post("/", upload.single("comunity_image"), async (req, res) => {
 	try {
 		const comunity = new Community({
 			user_id: req.body.user_id,
 			name: req.body.name,
-			image_url: req.file.filename,
+			comunity_image: req.file.filename,
 			description: req.body.description,
 			limit: req.body.limit,
 			state: req.body.state,
@@ -56,24 +56,17 @@ routerComunity.post("/", upload.single("image_url"), async (req, res) => {
  * @route PATCH /comunity/:id
  * */
 
-routerComunity.patch("/:id", upload.single("image_url"), async (req, res) => {
-	try {
-		if (!req.file) {
-			const comunity = await Community.findByIdAndUpdate(
-				req.params.id,
-				req.body,
-				{
-					new: true,
-				}
-			);
-			res.status(200).json(comunity);
-		} else {
+routerComunity.patch(
+	"/:id",
+	upload.single("comunity_image"),
+	async (req, res) => {
+		try {
 			const comunity = await Community.findByIdAndUpdate(
 				req.params.id,
 				{
 					user_id: req.body.user_id,
 					name: req.body.name,
-					image_url: req.file.path,
+					comunity_image: req.file.filename,
 					description: req.body.description,
 					limit: req.body.limit,
 				},
@@ -82,11 +75,11 @@ routerComunity.patch("/:id", upload.single("image_url"), async (req, res) => {
 				}
 			);
 			res.status(200).json(comunity);
+		} catch (error) {
+			res.status(500).json(error);
 		}
-	} catch (error) {
-		res.status(500).json(error);
 	}
-});
+);
 
 /**
  * Delete a comunity

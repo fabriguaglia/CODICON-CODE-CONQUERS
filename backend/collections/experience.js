@@ -9,7 +9,7 @@ const paginate = require("mongoose-paginate-v2");
  * @property {string} comment_id
  * @property {string} name
  * @property {string} description
- * @property {string} image_url
+ * @property {string} experience_image
  * @property {string} audio
  * @property {number} limit
  * @property {string} date_create
@@ -44,7 +44,7 @@ const experienceSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	image_url: {
+	experience_image: {
 		type: String,
 	},
 	audio: {

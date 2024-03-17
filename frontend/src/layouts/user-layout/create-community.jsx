@@ -11,7 +11,7 @@ const CreateCommunity = () => {
 		user_id: "",
 		name: "",
 		description: "",
-		image_url: null,
+		comunity_image: null,
 		limit: 0,
 		state: false,
 		reactions: [],
@@ -19,7 +19,7 @@ const CreateCommunity = () => {
 	const { userId } = useContext(AuthContext);
 
 	const handleChange = (e) => {
-		if (e.target.name === 'image_url' && e.target.files) {
+		if (e.target.name === 'comunity_image' && e.target.files) {
 			setCommunity({
 				...community,
 				[e.target.name]: e.target.files[0] // Asume que es un solo archivo
@@ -49,7 +49,7 @@ const CreateCommunity = () => {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("image_url", community.image_url);
+		formData.append("comunity_image", community.comunity_image);
 		formData.append("user_id", userId);
 		formData.append("name", community.name);
 		formData.append("description", community.description);
@@ -135,7 +135,7 @@ const CreateCommunity = () => {
 							</div>
 							<div className="mt-4">
 								<label
-									htmlFor="fileInput"
+									htmlFor="description"
 									className="block text-sm font-medium text-gray-700"
 								>
 									Descripcion:
@@ -150,15 +150,15 @@ const CreateCommunity = () => {
 							</div>
 							<div className="mt-4">
 								<label
-									htmlFor="image_url"
+									htmlFor="comunity_image"
 									className="block text-sm font-medium text-gray-700"
 								>
 									Seleccionar imagen:
 								</label>
 								<input
 									type="file"
-									id="image_url"
-									name="image_url"
+									id="comunity_image"
+									name="comunity_image"
 									className="block w-full py-2 px-3 rounded-lg border-gray-300 bg-white shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 									onChange={handleChange}
 								/>
