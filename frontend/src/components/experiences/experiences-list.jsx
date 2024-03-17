@@ -57,6 +57,9 @@ const ExperienceList = ({ backgroundColor }) => {
 		}
 	}, [userId]);
 
+	import "../community/community-list.css";
+
+
 	return (
 		//este div es el contenedor de la lista de comunidades, se le pasa el color de fondo que se le quiera dar y toma todo el ancho de la pantalla
 		<div

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import ItemList from "./item-list";
 import propTypes from "prop-types";
 import './community-list.css';
 
 const CommunityList = ({ backgroundColor }) => {
-
 	const url = "http://localhost:3002/comunity";
 	const [comunity, setComunity] = useState([]);
 	const [params, setParams] = useState({
@@ -72,7 +72,7 @@ const CommunityList = ({ backgroundColor }) => {
 				<button className="bg-secondary-color text-xl font-medium text-white py-2 px-16 rounded-full hover:bg-opacity-80 transition duration-300 uppercase">
 					Ver más comunidades...
 				</button>
-				<h2 className="text-lg mb-4">¿No encuentras tu comunidad? <a className="color-primary">Crea una nueva.</a></h2>
+				<h2 className="text-lg mb-4">¿No encuentras tu comunidad? <Link className="color-primary" to='/create-community'>Crea una nueva.</Link></h2>
 			</div>
 		</div>
 	);
