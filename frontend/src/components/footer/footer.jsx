@@ -61,7 +61,7 @@ const Footer = () => {
 				</div>
 				<div className="mt-8 border-t border-gray-600 pt-8 text-center">
 					<p>
-						&copy; 2024 Nombre de la Empresa. Todos los derechos reservados.
+						&copy; 2024 Transmivencia. Todos los derechos reservados.
 					</p>
 				</div>
 			</div>
