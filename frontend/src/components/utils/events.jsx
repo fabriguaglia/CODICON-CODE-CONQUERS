@@ -3,8 +3,8 @@ import YouTubePlayer from "./youtube-player";
 
 const Event = ({backgroundColor}) => {
 	return (
-		<div className={`p-8 w-full h-fit ${backgroundColor} flex flex-col items-center`}>
-			<h1 className="text-5xl text-white">Eventos en curso</h1>
+		<div className={`p-8 w-full h-fit ${backgroundColor} flex flex-col items-center `}>
+			<h1 className="text-5xl text-white  mb-8">Eventos en curso</h1>
 			<div className="flex flex-row justify-around items-center">
 				<div className="w-2/4 h-auti p-4">
 					<p className="text-xl text-white">
