@@ -35,17 +35,17 @@ const Landing = ({ userLogged }) => {
 							<path
 								d="M101.833 58.6666L64.5 90.6666L27.1667 58.6666"
 								stroke="#76007A"
-								stroke-width="8"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="8"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								opacity="0.5"
 								d="M101.833 37.3333L64.5 69.3333L27.1667 37.3333"
 								stroke="#76007A"
-								stroke-width="8"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="8"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 					</a>
