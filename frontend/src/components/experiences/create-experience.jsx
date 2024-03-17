@@ -68,7 +68,7 @@ const CreateExperience = () => {
 		e.preventDefault();
 
 		const formData = new FormData();
-		formData.append("comunity_image", experience.experience_image);
+		formData.append("experience_image", experience.experience_image);
 		formData.append("user_id", userId);
 		formData.append("comunity_id", comunity.map((comunity) => comunity._id));
 		formData.append("name", experience.name);

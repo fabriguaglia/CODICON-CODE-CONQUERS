@@ -68,11 +68,10 @@ const ExperiencePreview = ({
 			<div className={`w-fit flex flex-row mb-4`}>
 				<div className={`col-2 relative`}>
 					<img
-						src={userDefault}
+						src={"http://localhost:3002/images/" + experience_image}
 						alt="Imagen"
 						className="w-16 h-16 rounded-full object-cover"
 					/>
-					<div className="line"> {experience_image}</div>
 				</div>
 				<div className={`w-full col-4 px-2`}>
 					<div className="flex flex-col justify-between items-center">

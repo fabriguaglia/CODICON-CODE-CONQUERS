@@ -30,7 +30,7 @@ const CommmunityView = ({ index, community, goBack }) => {
 							+ Seguir
 						</button>
 					</div>
-                    <div>Reacciones {community.reactions} </div>
+					<div>Reacciones {community.reactions} </div>
 				</div>
 				{/* Columna 2 */}
 				<div className="w-1/3">
@@ -45,4 +45,9 @@ const CommmunityView = ({ index, community, goBack }) => {
 	);
 };
 
+CommmunityView.propTypes = {
+	index: propTypes.number,
+	community: propTypes.object,
+	goBack: propTypes.func
+}
 export default CommmunityView;
