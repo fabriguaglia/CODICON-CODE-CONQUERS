@@ -7,21 +7,27 @@ import axios from "axios";
 const ExperiencePreview = ({
 	user_id,
 	comunity_id,
-	comment_id,
-	reactions,
+	comment_id = [],
+	reactions = [],
 	name,
 	description,
 	experience_image,
 	audio,
 	limit,
 	anonimo,
-	hashtags,
+	hashtags = [],
 }) => {
 
 	const [user, setUser] = useState({});
 	const [comunity, setComunity] = useState({});
 	const [comment, setComment] = useState({});
 	const [reaction, setReaction] = useState({});
+	const [leyendo, setLeyendo] = useState(false);
+
+	const handleChange = (e) => {
+		e.preventDefault();
+		setLeyendo(!leyendo);
+	}
 
 	useEffect(() => {
 		axios
@@ -48,7 +54,7 @@ const ExperiencePreview = ({
 	useEffect(() => {
 		const arr = Array.isArray(comment_id) ? comment_id : [];
 		axios
-			.get(`http://localhost:3002/comment/?_id=${arr[0]}`)
+			.get(`http://localhost:3002/comment/?_id=${arr}`)
 			.then((response) => {
 				setComment(response.data.docs[0]);
 			})
@@ -66,27 +72,29 @@ const ExperiencePreview = ({
 						alt="Imagen"
 						className="w-16 h-16 rounded-full object-cover"
 					/>
-					<div className="line"></div>
+					<div className="line"> {experience_image}</div>
 				</div>
 				<div className={`w-full col-4 px-2`}>
-					<div className="flex justify-between items-center">
-						<h3 className="col-span-2 text-md font-medium mr-4 text-white">
-							{ }
+					<div className="flex flex-col justify-between items-center">
+						<h3 className=" text-lg font-medium mr-4 text-white">
+							{name}
 						</h3>
-						<p className="col-span-2 text-sm text-white">
-							{ }
-						</p>
+						<p className="text-white">Creado por: {anonimo ? "Anónimo" : user.name}</p>
+						<p className=" text-sm text-white">Comunidad: {comunity.name}</p>
+						<p className="text-white">Edad mínima para ver: {limit}</p>
+						{leyendo &&
+							<>
+								<p className="text-white">{description}</p>
+								<p className="text-white">Comentarios: {comment_id.length}</p>
+								<p className="text-white">Reacciones: {reactions.length}</p>
+								<p className="text-white">Hashtags: {hashtags.length}</p>
+							</>
+						}
 					</div>
-					<p className="col-span-2 text-white">{ }</p>
-					<button className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center ">
-						Seguir leyendo
+					<button onClick={handleChange} className="bg-primary-color text-white py-1 px-4 mt-2 rounded-full flex items-center">
+						{leyendo ? "Ocultar detalles" : "Seguir leyendo"}
 					</button>
 					<div className="flex justify-start mr-4 items-center">
-						{hashtags.map((hashtag, index) => (
-							<span key={index} className="text-white font-bold">
-								{hashtag}
-							</span>
-						))}
 					</div>
 				</div>
 			</div>
@@ -115,16 +123,6 @@ const commentsImage = () => {
 				alt="Imagen"
 				className="w-5 h-5 rounded-full object-cover"
 			/>
-		</div>
-	);
-};
-
-const tools = () => {
-	return (
-		<div className={`w-fit flex flex-row gap-4`}>
-			<span className="material-symbols-outlined text-white">favorite</span>
-			<span className="material-symbols-outlined text-white">chat_bubble</span>
-			<span className="material-symbols-outlined text-white">volume_up</span>
 		</div>
 	);
 };
