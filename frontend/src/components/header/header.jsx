@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/principal-image.png";
 import "./header.css";
 import UserLogin from "../dialog/user-login";
@@ -44,6 +45,19 @@ const Header = () => {
 		};
 	}, []);
 
+	const links = [
+		{
+			id: 1,
+			to: "/about",
+			name: "¿Quienes somos?",
+		},
+		{
+			id: 2,
+			to: "/support",
+			name: "Soporte",
+		}
+	]
+
 	const styles = {
 		div: "flex items-center",
 		links: "mr-4 cursor-pointer",
@@ -62,8 +76,15 @@ const Header = () => {
 					Iniciar sesión
 				</button>
 				<button className={styles.links} onClick={openRegisterModal}>Registrarse</button>
-				<button className={styles.links}>Quiénes somos</button>
-				<button className={styles.links}>Soporte</button>
+				{links.map((link) => (
+					<Link
+						key={link.id}
+						to={link.to}
+						className={styles.links}
+					>
+						{link.name}
+					</Link>
+				))}
 			</div>
 			<UserRegister isOpen={isRegisterModal} onClose={closeRegisterModal} />
 			<UserLogin isOpen={isLoginModal} onClose={closeLoginModal} />
