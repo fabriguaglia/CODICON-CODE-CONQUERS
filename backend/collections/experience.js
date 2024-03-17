@@ -6,12 +6,15 @@ const paginate = require("mongoose-paginate-v2");
  * @typedef Experience
  * @property {string} user_id
  * @property {string} comunity_id
- * @property {string} comment_id
+ * @property {Array} comment_id
+ * @property {Array} reacions
+ * @property {Array} hashtags
  * @property {string} name
  * @property {string} description
  * @property {string} experience_image
  * @property {string} audio
  * @property {number} limit
+ * @property {boolean} anonimo
  * @property {string} date_create
  * @property {string} date_update
  */
@@ -34,6 +37,12 @@ const experienceSchema = new mongoose.Schema({
 		{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Reaction",
+		},
+	],
+	hashtags: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Hashtag",
 		},
 	],
 	name: {

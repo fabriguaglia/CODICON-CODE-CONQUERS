@@ -1,9 +1,62 @@
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import ExperiencePreview from "./experience-preview";
 //import Image from "../../assets/principal-image.png";
 import propTypes from "prop-types";
 import "../community-list/community-list.css";
+import AuthContext from "../../services/authcontext";
 
-const ExperienceList = ({ items, backgroundColor }) => {
+const ExperienceList = ({ backgroundColor }) => {
+	const url = "http://localhost:3002/";
+	const [experience, setExperience] = useState([]);
+	const [comunity, setComunity] = useState([]);
+	const { userId } = useContext(AuthContext);
+
+	const [params, setParams] = useState({
+		name: '',
+	});
+
+	const handleChange = (e) => {
+		setParams({
+			...params,
+			[e.target.name]: e.target.value
+		})
+	};
+
+	useEffect(() => {
+		try {
+			axios.get(url + "experience/", {
+				params: {
+					name: params.name
+				}
+			}).then((response) => {
+				setExperience(response.data.docs);
+				console.log(response.data.docs);
+			}).catch((error) => {
+				console.log(error);
+			})
+		} catch (error) {
+			console.log(error);
+		}
+	}, [params]);
+
+	useEffect(() => {
+		try {
+			axios.get(url + "comunity/", {
+				params: {
+					user_id: userId
+				}
+			}).then((response) => {
+				setComunity(response.data.docs[0]);
+				console.log(response.data.docs);
+			}).catch((error) => {
+				console.log(error);
+			})
+		} catch (error) {
+			console.log(error);
+		}
+	}, [userId]);
+
 	return (
 		//este div es el contenedor de la lista de comunidades, se le pasa el color de fondo que se le quiera dar y toma todo el ancho de la pantalla
 		<div
@@ -13,16 +66,16 @@ const ExperienceList = ({ items, backgroundColor }) => {
 				{/* Genera una grilla de 1 o 2 columnas dependiendo del tamaño de la pantalla */}
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{/* Se genera un ItemList por cada item que se le pase */}
-					{items.map((item, index) => (
+					{Array.isArray(experience) && experience.map((item, index) => (
 						<ExperiencePreview
 							key={index}
-							{...item}
-							userName="Anonimous"
-							time={new Date()}
-							userImg=""
-							text="Les cuento mi experiencia, era un día soleado y bla bla bla..."
-							hashtags={["#discriminación", "#superación"]}
-							comments={true}
+							name={item.name}
+							description={item.description}
+							comunity_id={comunity._id}
+							experience_id={item._id}
+							state={item.state}
+							reactions={item.reactions}
+							comments={item.comments}
 						/>
 					))}
 				</div>
@@ -38,7 +91,6 @@ const ExperienceList = ({ items, backgroundColor }) => {
 };
 
 ExperienceList.propTypes = {
-	items: propTypes.array.isRequired,
 	backgroundColor: propTypes.string,
 };
 
