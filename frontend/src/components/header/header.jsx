@@ -90,9 +90,6 @@ const Header = ({ green }) => {
 					</Link>
 				))}
 
-				<Link className={styles.links} to="/about">Quiénes somos</Link>
-				<button className={styles.links}>Soporte</button>
-
 			</div>
 			<UserRegister isOpen={isRegisterModal} onClose={closeRegisterModal} />
 			<UserLogin isOpen={isLoginModal} onClose={closeLoginModal} />

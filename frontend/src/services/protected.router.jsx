@@ -1,35 +1,41 @@
-import { Outlet, useLocation } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "./authcontext"
-import propTypes from "prop-types";
-const ProtectedRouter = ({ children }) => {
-	const { token } = useContext(AuthContext);
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import AuthContext from "./authcontext";
+import Swal from "sweetalert2";
 
-	const linksProtected = [
-		"/create-community",
-		"/comunity",
-		"/experience",
-		"/event",
-		"/message"
-	]
-
+const ProtectedRouter = () => {
+	const { token, userId } = useContext(AuthContext);
+	const navigate = useNavigate();
 	const location = useLocation();
-	const path = location.pathname;
 
-	if (!token) {
-		return (
-			<>
-				{linksProtected.includes(path) ? <Outlet /> : <div>Unauthorized</div>}
-			</>
-		)
-	} else {
-		return (
-			<>{children ? children : <Outlet />}</>
-		)
-	}
-}
-ProtectedRouter.propTypes = {
-	children: propTypes.node
-}
+	useEffect(() => {
+		const path = location.pathname;
+		const isPublicRoute = ["/", "/about", "/support"].includes(path);
+		const isProtectedRoute = ["/create-community", "/community", "/experience", "/event", "/message"].includes(path);
 
-export default ProtectedRouter
+		if (token && userId && isPublicRoute) {
+			// Usuario autenticado en ruta pública, redirigir a ruta protegida (ej: "/community")
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Tu no estas autorizado para acceder a esta ruta",
+				timer: 1500
+			})
+			navigate("/community");
+		} else if (!token && !userId && isProtectedRoute) {
+			// Usuario no autenticado en ruta protegida, redirigir a ruta pública (ej: "/")
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Tu no estas autorizado para acceder a esta ruta",
+				timer: 1500
+			})
+			navigate("/");
+		}
+		// Si está en una ruta protegida y autenticado, o en pública y no autenticado, no hace nada (permite el acceso)
+	}, [token, userId, location.pathname, navigate]);
+
+	return <Outlet />;
+};
+
+export default ProtectedRouter;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import Image from "../../assets/principal-image.png";
 import Header from "../../components/header/header";
@@ -33,7 +33,7 @@ const CreateCommunity = () => {
 	return (
 		<div>
 			<div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50">
-			<Header green={true}/>
+				<Header green={true} />
 				<div className="bg-contrast-color w-full h-full flex flex-col justify-center items-center">
 					<div className="flex justify-center">
 						<img src={Image} alt="Imagen de tu Landing" className="max-h-40" />
@@ -106,7 +106,7 @@ const CreateCommunity = () => {
 							</button>
 						</div>
 					</form>
-					{/* 
+					{/*
 
 					<button
 						className=" text-white px-4 py-2 rounded-md"

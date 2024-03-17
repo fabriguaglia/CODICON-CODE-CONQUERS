@@ -5,7 +5,6 @@ import './experiences.css';
 const ExperiencePreview = ({
 	userName,
 	time,
-	userImg,
 	comments,
 	text,
 	hashtags,
@@ -76,9 +75,9 @@ const commentsImage = () => {
 const tools = () => {
 	return (
 		<div className={`w-fit flex flex-row gap-4`}>
-			<span class="material-symbols-outlined text-white">favorite</span>
-			<span class="material-symbols-outlined text-white">chat_bubble</span>
-			<span class="material-symbols-outlined text-white">volume_up</span>
+			<span className="material-symbols-outlined text-white">favorite</span>
+			<span className="material-symbols-outlined text-white">chat_bubble</span>
+			<span className="material-symbols-outlined text-white">volume_up</span>
 		</div>
 	);
 };

@@ -19,7 +19,6 @@ function App() {
 					<Route path="/" element={<UserLayout />} />
 					<Route path="/about" element={<AboutLayout />} />
 					<Route path="/support" element={<SupportLayout />} />
-					<Route path="*" />
 					<Route element={<ProtectedRouter />} >
 
 						<Route path="/create-community" element={<CreateCommunity />} />

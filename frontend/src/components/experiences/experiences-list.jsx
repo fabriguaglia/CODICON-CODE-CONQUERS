@@ -1,5 +1,5 @@
 import ExperiencePreview from "./experience-preview";
-import Image from "../../assets/principal-image.png";
+//import Image from "../../assets/principal-image.png";
 import propTypes from "prop-types";
 import "../community-list/community-list.css";
 
@@ -7,7 +7,7 @@ const ExperienceList = ({ items, backgroundColor }) => {
 	return (
 		//este div es el contenedor de la lista de comunidades, se le pasa el color de fondo que se le quiera dar y toma todo el ancho de la pantalla
 		<div
-			className={`max-w-full mx-auto px-4 py-8 ${backgroundColor} flex flex-col items-center`}
+			className={`p-8 w-full h-fit ${backgroundColor} flex flex-col items-center`}
 		>
 			<div className={`flex flex-col justify-around`}>
 				{/* Genera una grilla de 1 o 2 columnas dependiendo del tamaño de la pantalla */}
@@ -15,6 +15,8 @@ const ExperienceList = ({ items, backgroundColor }) => {
 					{/* Se genera un ItemList por cada item que se le pase */}
 					{items.map((item, index) => (
 						<ExperiencePreview
+							key={index}
+							{...item}
 							userName="Anonimous"
 							time={new Date()}
 							userImg=""
@@ -29,7 +31,7 @@ const ExperienceList = ({ items, backgroundColor }) => {
 				<button className="bg-secondary-color text-xl font-medium text-white py-2 px-16 rounded-full hover:bg-opacity-80 transition duration-300 uppercase">
 					Leer mas experiencias
 				</button>
-				
+
 			</div>
 		</div>
 	);
